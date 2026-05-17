@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>多肽合成_多肽修饰_多肽定制_吉娃娃生物</title>
+    <meta name="description" content="吉娃娃生物专注多肽合成、多肽修饰与多肽定制服务，提供高品质多肽产品与专业技术支持。">
+    <meta name="keywords" content="多肽合成,多肽修饰,多肽定制,多肽技术服务,吉娃娃生物,肽定制厂家">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container top-bar-inner">
+            <span class="top-welcome">欢迎来到吉娃娃生物科技有限公司官网！</span>
+            <div class="top-links">
+                <a href="#sitemap">网站地图</a>
+                <span class="divider">|</span>
+                <a href="#contact">联系我们</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="container header-inner">
+            <div class="logo-area">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="30" cy="30" r="28" stroke="url(#logoGrad)" stroke-width="2" fill="none"/>
+                        <circle cx="30" cy="18" r="5" fill="url(#logoGrad)"/>
+                        <circle cx="18" cy="38" r="5" fill="url(#logoGrad)"/>
+                        <circle cx="42" cy="38" r="5" fill="url(#logoGrad)"/>
+                        <line x1="30" y1="23" x1="22" y1="34" stroke="url(#logoGrad)" stroke-width="2"/>
+                        <line x1="30" y1="23" x2="38" y2="34" stroke="url(#logoGrad)" stroke-width="2"/>
+                        <line x1="23" y1="38" x2="37" y2="38" stroke="url(#logoGrad)" stroke-width="2"/>
+                        <defs>
+                            <linearGradient id="logoGrad" x1="0" y1="0" x2="60" y2="60">
+                                <stop offset="0%" stop-color="#00C9A7"/>
+                                <stop offset="100%" stop-color="#0891B2"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                <div class="logo-text">
+                    <span class="logo-en">Chihuahua Bio</span>
+                    <span class="logo-cn">吉娃娃生物</span>
+                </div>
+            </div>
+            <div class="header-info">
+                <div class="tagline">
+                    <span class="tagline-main">专注多肽领域 · 专业定制服务商</span>
+                    <span class="tagline-sub">多肽合成 | 多肽修饰 | 多肽定制 | 技术开发</span>
+                </div>
+                <div class="header-contact">
+                    <svg class="phone-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+                    </svg>
+                    <span>咨询热线：0771-0000-000</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+        <div class="container nav-inner">
+            <ul class="nav-list">
+                <li class="nav-item active"><a href="#home">吉娃娃首页</a></li>
+                <li class="nav-item"><a href="#synthesis">多肽合成</a></li>
+                <li class="nav-item"><a href="#modification">多肽修饰</a></li>
+                <li class="nav-item"><a href="#custom">多肽定制</a></li>
+                <li class="nav-item"><a href="#products">产品中心</a></li>
+                <li class="nav-item"><a href="#cases">客户案例</a></li>
+                <li class="nav-item"><a href="#news">公司资讯</a></li>
+                <li class="nav-item"><a href="#about">关于吉娃娃</a></li>
+                <li class="nav-item"><a href="#contact">联系吉娃娃</a></li>
+            </ul>
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="菜单">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-bg">
+            <canvas id="heroCanvas"></canvas>
+            <div class="hero-overlay"></div>
+        </div>
+        <div class="container hero-content">
+            <div class="hero-left">
+                <div class="hero-bubbles">
+                    <div class="bubble bubble-1">
+                        <span class="bubble-zh">文献可查</span>
+                        <span class="bubble-en">Literature Available</span>
+                    </div>
+                    <div class="bubble bubble-2">
+                        <span class="bubble-zh">活性优秀</span>
+                        <span class="bubble-en">Excellent Activity</span>
+                    </div>
+                    <div class="bubble bubble-main">
+                        <span class="bubble-zh">多肽合成与修饰</span>
+                        <span class="bubble-en">Peptide Synthesis & Modification</span>
+                    </div>
+                    <div class="bubble bubble-3">
+                        <span class="bubble-zh">多肽技术开发</span>
+                        <span class="bubble-en">Technology Development</span>
+                    </div>
+                </div>
+                <div class="hero-molecule">
+                    <svg viewBox="0 0 200 200" class="molecule-svg">
+                        <circle cx="100" cy="40" r="8" fill="#00C9A7" opacity="0.6"/>
+                        <circle cx="60" cy="90" r="6" fill="#0891B2" opacity="0.5"/>
+                        <circle cx="140" cy="90" r="6" fill="#00C9A7" opacity="0.5"/>
+                        <circle cx="40" cy="150" r="5" fill="#0891B2" opacity="0.4"/>
+                        <circle cx="100" cy="160" r="7" fill="#00C9A7" opacity="0.5"/>
+                        <circle cx="160" cy="150" r="5" fill="#0891B2" opacity="0.4"/>
+                        <line x1="100" y1="48" x2="65" y2="85" stroke="#00C9A7" stroke-width="1.5" opacity="0.3"/>
+                        <line x1="100" y1="48" x2="135" y2="85" stroke="#0891B2" stroke-width="1.5" opacity="0.3"/>
+                        <line x1="60" y1="96" x2="44" y2="145" stroke="#00C9A7" stroke-width="1.5" opacity="0.3"/>
+                        <line x1="60" y1="96" x2="94" y2="154" stroke="#0891B2" stroke-width="1.5" opacity="0.3"/>
+                        <line x1="140" y1="96" x2="156" y2="145" stroke="#00C9A7" stroke-width="1.5" opacity="0.3"/>
+                        <line x1="140" y1="96" x2="106" y2="154" stroke="#0891B2" stroke-width="1.5" opacity="0.3"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="hero-right">
+                <h2 class="hero-title">吉娃娃生物 · 专业多肽技术服务</h2>
+                <p class="hero-subtitle">Professional Peptide Technology Service Provider</p>
+                <p class="hero-desc">配备先进分析检测仪器，完善的质量管理体系，为客户提供从多肽合成、修饰到定制的一站式解决方案。所有产品均经过严格质控，确保纯度与活性。</p>
+                <a href="#synthesis" class="hero-btn">
+                    <span>了解多肽合成服务</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
+                <div class="hero-equipment">
+                    <div class="equip-card">
+                        <div class="equip-icon">
+                            <svg viewBox="0 0 48 48" fill="none"><rect x="8" y="12" width="32" height="24" rx="3" stroke="currentColor" stroke-width="2"/><rect x="14" y="18" width="20" height="12" rx="1" stroke="currentColor" stroke-width="1.5"/><circle cx="38" cy="38" r="4" stroke="currentColor" stroke-width="2"/><circle cx="10" cy="38" r="4" stroke="currentColor" stroke-width="2"/></svg>
+                        </div>
+                        <span>HPLC/UPLC 分析</span>
+                    </div>
+                    <div class="equip-card">
+                        <div class="equip-icon">
+                            <svg viewBox="0 0 48 48" fill="none"><rect x="6" y="8" width="36" height="28" rx="3" stroke="currentColor" stroke-width="2"/><path d="M6 20h36" stroke="currentColor" stroke-width="1.5"/><circle cx="24" cy="36" r="4" stroke="currentColor" stroke-width="2"/><path d="M18 8V4h12v4" stroke="currentColor" stroke-width="2"/></svg>
+                        </div>
+                        <span>MS 质谱检测</span>
+                    </div>
+                    <div class="equip-card">
+                        <div class="equip-icon">
+                            <svg viewBox="0 0 48 48" fill="none"><path d="M24 4v8M12 8l4 6M36 8l-4 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="24" cy="28" r="14" stroke="currentColor" stroke-width="2"/><path d="M18 28h12M24 22v12" stroke="currentColor" stroke-width="1.5"/></svg>
+                        </div>
+                        <span>洁净实验室</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Keywords Bar -->
+    <section class="keywords-bar">
+        <div class="container">
+            <span class="kw-label">热门关键词：</span>
+            <a href="#synthesis">多肽合成</a>
+            <span class="kw-sep">|</span>
+            <a href="#modification">多肽修饰</a>
+            <span class="kw-sep">|</span>
+            <a href="#custom">多肽定制</a>
+            <span class="kw-sep">|</span>
+            <a href="#products">新生抗原肽</a>
+            <span class="kw-sep">|</span>
+            <a href="#products">抗菌肽</a>
+            <span class="kw-sep">|</span>
+            <a href="#products">PNA合成</a>
+            <span class="kw-sep">|</span>
+            <a href="#products">肽核酸合成</a>
+            <span class="kw-sep">|</span>
+            <a href="#products">磷酸化多肽</a>
+            <span class="kw-sep">|</span>
+            <a href="#products">荧光标记多肽</a>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="synthesis">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">核心服务</h2>
+                <p class="section-subtitle">Core Services</p>
+                <div class="title-line"></div>
+            </div>
+            <div class="services-grid">
+                <div class="service-card" data-aos="fade-up">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 80 80" fill="none">
+                            <circle cx="40" cy="40" r="35" stroke="url(#s1)" stroke-width="2" stroke-dasharray="4 4"/>
+                            <circle cx="25" cy="30" r="6" fill="#00C9A7"/>
+                            <circle cx="55" cy="30" r="6" fill="#0891B2"/>
+                            <circle cx="40" cy="55" r="6" fill="#00C9A7"/>
+                            <line x1="30" y1="33" x2="50" y2="33" stroke="#00C9A7" stroke-width="2"/>
+                            <line x1="28" y1="35" x2="37" y2="50" stroke="#0891B2" stroke-width="2"/>
+                            <line x1="52" y1="35" x2="43" y2="50" stroke="#00C9A7" stroke-width="2"/>
+                            <text x="40" y="75" text-anchor="middle" fill="#666" font-size="8">NH₂-COOH</text>
+                            <defs><linearGradient id="s1" x1="0" y1="0" x2="80" y2="80"><stop offset="0%" stop-color="#00C9A7"/><stop offset="100%" stop-color="#0891B2"/></linearGradient></defs>
+                        </svg>
+                    </div>
+                    <h3>多肽合成</h3>
+                    <p>Peptide Synthesis</p>
+                    <p class="service-desc">采用固相多肽合成技术（SPPS），支持从毫克到克级规模的多肽合成。涵盖线性肽、环肽、二硫键肽等多种类型，纯度可达99%以上。</p>
+                    <ul class="service-features">
+                        <li>✓ 毫克至百克级合成</li>
+                        <li>✓ 纯度最高99%+</li>
+                        <li>✓ 快速交付（5-15个工作日）</li>
+                        <li>✓ 详细COA质检报告</li>
+                    </ul>
+                    <a href="#" class="service-link">了解详情 →</a>
+                </div>
+                <div class="service-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 80 80" fill="none">
+                            <circle cx="40" cy="40" r="35" stroke="url(#s2)" stroke-width="2" stroke-dasharray="4 4"/>
+                            <circle cx="40" cy="25" r="8" fill="#0891B2" opacity="0.8"/>
+                            <circle cx="40" cy="25" r="4" fill="#00C9A7"/>
+                            <path d="M40 33v10M35 43h10" stroke="#00C9A7" stroke-width="2"/>
+                            <circle cx="30" cy="55" r="5" fill="#0891B2" opacity="0.6"/>
+                            <circle cx="50" cy="55" r="5" fill="#00C9A7" opacity="0.6"/>
+                            <line x1="37" y1="53" x2="33" y2="55" stroke="#0891B2" stroke-width="1.5"/>
+                            <line x1="43" y1="53" x2="47" y2="55" stroke="#00C9A7" stroke-width="1.5"/>
+                            <text x="40" y="75" text-anchor="middle" fill="#666" font-size="7">MODIFICATION</text>
+                            <defs><linearGradient id="s2" x1="0" y1="0" x2="80" y2="80"><stop offset="0%" stop-color="#0891B2"/><stop offset="100%" stop-color="#00C9A7"/></linearGradient></defs>
+                        </svg>
+                    </div>
+                    <h3>多肽修饰</h3>
+                    <p>Peptide Modification</p>
+                    <p class="service-desc">提供多种多肽修饰服务，包括磷酸化、乙酰化、甲基化、荧光标记、生物素标记、PEG修饰、脂肪酸修饰等，满足不同研究方向需求。</p>
+                    <ul class="service-features">
+                        <li>✓ 荧光标记（FITC/FAM/Cy系列）</li>
+                        <li>✓ 同位素标记</li>
+                        <li>✓ 磷酸化/糖基化修饰</li>
+                        <li>✓ PEG/脂肪酸偶联</li>
+                    </ul>
+                    <a href="#" class="service-link">了解详情 →</a>
+                </div>
+                <div class="service-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 80 80" fill="none">
+                            <circle cx="40" cy="40" r="35" stroke="url(#s3)" stroke-width="2" stroke-dasharray="4 4"/>
+                            <rect x="20" y="20" width="40" height="40" rx="5" stroke="#00C9A7" stroke-width="2" fill="none"/>
+                            <path d="M30 35h20M30 42h14M30 49h18" stroke="#0891B2" stroke-width="1.5"/>
+                            <circle cx="55" cy="25" r="6" fill="#00C9A7" opacity="0.7"/>
+                            <path d="M55 31v8" stroke="#00C9A7" stroke-width="1.5"/>
+                            <text x="40" y="75" text-anchor="middle" fill="#666" font-size="7">CUSTOM</text>
+                            <defs><linearGradient id="s3" x1="0" y1="0" x2="80" y2="80"><stop offset="0%" stop-color="#00C9A7"/><stop offset="100%" stop-color="#0891B2"/></linearGradient></defs>
+                        </svg>
+                    </div>
+                    <h3>多肽定制</h3>
+                    <p>Peptide Customization</p>
+                    <p class="service-desc">根据客户需求提供个性化多肽定制服务，从序列设计到成品交付全程支持。专业团队一对一沟通，确保满足科研与产业化需求。</p>
+                    <ul class="service-features">
+                        <li>✓ 个性化序列设计</li>
+                        <li>✓ 一对一技术支持</li>
+                        <li>✓ 大规模生产放大</li>
+                        <li>✓ 严格保密协议</li>
+                    </ul>
+                    <a href="#" class="service-link">了解详情 →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technology Section -->
+    <section class="technology" id="modification">
+        <div class="container">
+            <div class="tech-banner">
+                <div class="tech-banner-content">
+                    <div class="tech-badge">核心优势</div>
+                    <h2>先进多肽合成技术平台</h2>
+                    <p>Advanced Peptide Synthesis Technology Platform</p>
+                    <div class="tech-features">
+                        <div class="tech-feature">
+                            <div class="tech-num">01</div>
+                            <div>
+                                <h4>固相多肽合成（SPPS）</h4>
+                                <p>采用Fmoc/tBoc策略，从毫克到百克级灵活合成</p>
+                            </div>
+                        </div>
+                        <div class="tech-feature">
+                            <div class="tech-num">02</div>
+                            <div>
+                                <h4>液相色谱纯化</h4>
+                                <p>制备型HPLC纯化，确保产品高纯度与高活性</p>
+                            </div>
+                        </div>
+                        <div class="tech-feature">
+                            <div class="tech-num">03</div>
+                            <div>
+                                <h4>全面质控体系</h4>
+                                <p>MS分子量确认 + HPLC纯度检测，每批产品附COA报告</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tech-visual">
+                    <div class="peptide-chain">
+                        <div class="amino-acid" style="--delay: 0s; --color: #00C9A7;">
+                            <span class="aa-letter">G</span>
+                            <span class="aa-name">Gly</span>
+                        </div>
+                        <div class="bond"></div>
+                        <div class="amino-acid" style="--delay: 0.1s; --color: #0891B2;">
+                            <span class="aa-letter">A</span>
+                            <span class="aa-name">Ala</span>
+                        </div>
+                        <div class="bond"></div>
+                        <div class="amino-acid" style="--delay: 0.2s; --color: #00C9A7;">
+                            <span class="aa-letter">L</span>
+                            <span class="aa-name">Leu</span>
+                        </div>
+                        <div class="bond"></div>
+                        <div class="amino-acid" style="--delay: 0.3s; --color: #0891B2;">
+                            <span class="aa-letter">S</span>
+                            <span class="aa-name">Ser</span>
+                        </div>
+                        <div class="bond"></div>
+                        <div class="amino-acid" style="--delay: 0.4s; --color: #00C9A7;">
+                            <span class="aa-letter">K</span>
+                            <span class="aa-name">Lys</span>
+                        </div>
+                        <div class="bond"></div>
+                        <div class="amino-acid modified" style="--delay: 0.5s; --color: #F59E0B;">
+                            <span class="aa-letter">Y*</span>
+                            <span class="aa-name">pTyr</span>
+                        </div>
+                        <div class="bond"></div>
+                        <div class="amino-acid" style="--delay: 0.6s; --color: #0891B2;">
+                            <span class="aa-letter">V</span>
+                            <span class="aa-name">Val</span>
+                        </div>
+                        <div class="bond"></div>
+                        <div class="amino-acid" style="--delay: 0.7s; --color: #00C9A7;">
+                            <span class="aa-letter">F</span>
+                            <span class="aa-name">Phe</span>
+                        </div>
+                    </div>
+                    <p class="peptide-label">示例：磷酸化修饰多肽序列 G-A-L-S-K-pY-V-F</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products" id="products">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">产品中心</h2>
+                <p class="section-subtitle">Product Center</p>
+                <div class="title-line"></div>
+            </div>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-img" style="background: linear-gradient(135deg, #00C9A7 0%, #0891B2 100%);">
+                        <svg viewBox="0 0 120 80" fill="none" style="width:80px;height:60px;">
+                            <path d="M20 60V30l20-15 20 15v30H20z" stroke="white" stroke-width="2" fill="none"/>
+                            <path d="M60 60V25l20-15 20 15v35H60z" stroke="white" stroke-width="2" fill="none" opacity="0.6"/>
+                            <circle cx="40" cy="45" r="5" stroke="white" stroke-width="1.5" fill="none"/>
+                            <circle cx="80" cy="40" r="5" stroke="white" stroke-width="1.5" fill="none" opacity="0.6"/>
+                        </svg>
+                    </div>
+                    <div class="product-info">
+                        <h3>新生抗原肽</h3>
+                        <p>Neoantigen Peptides</p>
+                        <p class="product-desc">为肿瘤免疫治疗研究提供个性化新生抗原肽合成服务，支持多种HLA分型，快速交付满足临床前研究需求。</p>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-img" style="background: linear-gradient(135deg, #0891B2 0%, #6366F1 100%);">
+                        <svg viewBox="0 0 120 80" fill="none" style="width:80px;height:60px;">
+                            <circle cx="40" cy="40" r="20" stroke="white" stroke-width="2" fill="none"/>
+                            <circle cx="80" cy="40" r="20" stroke="white" stroke-width="2" fill="none" opacity="0.5"/>
+                            <path d="M55 30c5-8 15-8 20 0" stroke="white" stroke-width="1.5" fill="none"/>
+                            <path d="M55 50c5 8 15 8 20 0" stroke="white" stroke-width="1.5" fill="none"/>
+                        </svg>
+                    </div>
+                    <div class="product-info">
+                        <h3>抗菌肽</h3>
+                        <p>Antimicrobial Peptides</p>
+                        <p class="product-desc">提供多种天然与改造抗菌肽的合成服务，广泛应用于抗感染研究、新型抗生素开发等领域。</p>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-img" style="background: linear-gradient(135deg, #F59E0B 0%, #EF4444 100%);">
+                        <svg viewBox="0 0 120 80" fill="none" style="width:80px;height:60px;">
+                            <path d="M20 40h80" stroke="white" stroke-width="2"/>
+                            <circle cx="30" cy="40" r="8" stroke="white" stroke-width="2" fill="none"/>
+                            <circle cx="60" cy="40" r="8" stroke="white" stroke-width="2" fill="none"/>
+                            <circle cx="90" cy="40" r="8" stroke="white" stroke-width="2" fill="none"/>
+                            <circle cx="30" cy="40" r="3" fill="white"/>
+                            <circle cx="60" cy="40" r="3" fill="white"/>
+                            <circle cx="90" cy="40" r="3" fill="white"/>
+                        </svg>
+                    </div>
+                    <div class="product-info">
+                        <h3>荧光标记多肽</h3>
+                        <p>Fluorescent Labeled Peptides</p>
+                        <p class="product-desc">提供FITC、FAM、Cy3、Cy5、Rhodamine等多种荧光素标记服务，满足细胞示踪、受体结合等实验需求。</p>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-img" style="background: linear-gradient(135deg, #6366F1 0%, #EC4899 100%);">
+                        <svg viewBox="0 0 120 80" fill="none" style="width:80px;height:60px;">
+                            <path d="M20 60c0-20 20-35 40-35s40 15 40 35" stroke="white" stroke-width="2" fill="none"/>
+                            <circle cx="60" cy="25" r="6" stroke="white" stroke-width="2" fill="none"/>
+                            <path d="M30 50h60" stroke="white" stroke-width="1.5" stroke-dasharray="3 3"/>
+                            <circle cx="40" cy="45" r="3" fill="white" opacity="0.6"/>
+                            <circle cx="80" cy="45" r="3" fill="white" opacity="0.6"/>
+                        </svg>
+                    </div>
+                    <div class="product-info">
+                        <h3>磷酸化多肽</h3>
+                        <p>Phosphorylated Peptides</p>
+                        <p class="product-desc">专业合成Ser/Thr/Tyr磷酸化修饰多肽，广泛应用于信号转导、蛋白质功能研究及激酶底物分析。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Advantages Section -->
+    <section class="advantages" id="cases">
+        <div class="container">
+            <div class="section-header light">
+                <h2 class="section-title">为什么选择吉娃娃生物</h2>
+                <p class="section-subtitle">Why Choose Chihuahua Bio</p>
+                <div class="title-line"></div>
+            </div>
+            <div class="advantages-grid">
+                <div class="advantage-item">
+                    <div class="adv-number">1000+</div>
+                    <div class="adv-label">服务客户数量</div>
+                    <div class="adv-desc">覆盖全国高校、科研院所及生物医药企业</div>
+                </div>
+                <div class="advantage-item">
+                    <div class="adv-number">99%+</div>
+                    <div class="adv-label">产品纯度保证</div>
+                    <div class="adv-desc">严格质控体系，每批产品附详细COA报告</div>
+                </div>
+                <div class="advantage-item">
+                    <div class="adv-number">5-15天</div>
+                    <div class="adv-label">快速交付周期</div>
+                    <div class="adv-desc">标准多肽5-15个工作日交付，加急服务可选</div>
+                </div>
+                <div class="advantage-item">
+                    <div class="adv-number">24h</div>
+                    <div class="adv-label">技术响应时间</div>
+                    <div class="adv-desc">专业团队一对一沟通，快速响应技术需求</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-content">
+                    <div class="section-header left">
+                        <h2 class="section-title">关于吉娃娃生物</h2>
+                        <p class="section-subtitle">About Chihuahua Bio</p>
+                        <div class="title-line"></div>
+                    </div>
+                    <p class="about-text">广西吉娃娃生物科技有限公司是一家专注于多肽领域的技术服务型企业，总部位于广西南宁市。公司致力于为科研机构、高校实验室及生物医药企业提供高品质的多肽合成、多肽修饰与多肽定制服务。</p>
+                    <p class="about-text">公司配备先进的分析检测仪器，建立了完善的质量管理体系。凭借专业的技术团队和严格的质量控制，吉娃娃生物已为全国众多客户提供了可靠的多肽产品与技术解决方案，涵盖新生抗原肽、抗菌肽、荧光标记多肽、磷酸化多肽等多个方向。</p>
+                    <div class="about-highlights">
+                        <div class="highlight-item">
+                            <div class="highlight-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                            </div>
+                            <span>专业多肽技术团队</span>
+                        </div>
+                        <div class="highlight-item">
+                            <div class="highlight-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                            </div>
+                            <span>完善质量管理体系</span>
+                        </div>
+                        <div class="highlight-item">
+                            <div class="highlight-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                            </div>
+                            <span>快速响应客户需求</span>
+                        </div>
+                        <div class="highlight-item">
+                            <div class="highlight-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                            </div>
+                            <span>严格保密客户信息</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-visual">
+                    <div class="about-card-stack">
+                        <div class="about-card card-1">
+                            <div class="card-icon">🧬</div>
+                            <h4>多肽合成</h4>
+                            <p>SPPS固相合成技术</p>
+                        </div>
+                        <div class="about-card card-2">
+                            <div class="card-icon">⚗️</div>
+                            <h4>多肽修饰</h4>
+                            <p>多种标记与修饰类型</p>
+                        </div>
+                        <div class="about-card card-3">
+                            <div class="card-icon">📋</div>
+                            <h4>多肽定制</h4>
+                            <p>个性化一站式服务</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">联系我们</h2>
+                <p class="section-subtitle">Contact Us</p>
+                <div class="title-line"></div>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        </div>
+                        <div>
+                            <h4>公司地址</h4>
+                            <p>广西南宁市青秀区新岸路6号</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+                        </div>
+                        <div>
+                            <h4>咨询电话</h4>
+                            <p>0771-0000-000</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                        </div>
+                        <div>
+                            <h4>电子邮箱</h4>
+                            <p>info@chihuahuabio.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                        </div>
+                        <div>
+                            <h4>工作时间</h4>
+                            <p>周一至周五 9:00 - 18:00</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <h3>在线询价</h3>
+                    <p>填写以下信息，我们将在24小时内与您联系</p>
+                    <form id="inquiryForm">
+                        <div class="form-row">
+                            <input type="text" placeholder="您的姓名 *" required>
+                            <input type="tel" placeholder="联系电话 *" required>
+                        </div>
+                        <input type="email" placeholder="电子邮箱">
+                        <input type="text" placeholder="多肽序列或需求描述">
+                        <textarea placeholder="详细需求说明（如需合成序列、纯度要求、修饰类型等）" rows="4"></textarea>
+                        <button type="submit" class="submit-btn">提交询价</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="sitemap">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <span class="footer-logo-en">Chihuahua Bio</span>
+                        <span class="footer-logo-cn">吉娃娃生物</span>
+                    </div>
+                    <p class="footer-about">专注多肽合成、多肽修饰与多肽定制服务，为科研与产业提供高品质多肽产品。</p>
+                </div>
+                <div class="footer-col">
+                    <h4>服务项目</h4>
+                    <ul>
+                        <li><a href="#synthesis">多肽合成</a></li>
+                        <li><a href="#modification">多肽修饰</a></li>
+                        <li><a href="#custom">多肽定制</a></li>
+                        <li><a href="#products">产品中心</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>关于我们</h4>
+                    <ul>
+                        <li><a href="#about">公司简介</a></li>
+                        <li><a href="#cases">客户案例</a></li>
+                        <li><a href="#news">公司资讯</a></li>
+                        <li><a href="#contact">联系方式</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>联系方式</h4>
+                    <ul class="footer-contact">
+                        <li>📍 广西南宁市青秀区新岸路6号</li>
+                        <li>📞 0771-0000-000</li>
+                        <li>✉️ info@chihuahuabio.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2024 广西吉娃娃生物科技有限公司 版权所有</p>
+                <p class="footer-icp">桂ICP备XXXXXXXX号</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Contact -->
+    <div class="floating-contact" id="floatingContact">
+        <div class="float-btn" id="floatBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+        </div>
+        <div class="float-panel" id="floatPanel">
+            <h4>在线咨询</h4>
+            <p>如有任何多肽相关问题，欢迎咨询！</p>
+            <div class="float-qr">
+                <div class="qr-placeholder">
+                    <svg viewBox="0 0 100 100" fill="none" width="80" height="80">
+                        <rect x="10" y="10" width="30" height="30" rx="3" stroke="#00C9A7" stroke-width="3"/>
+                        <rect x="60" y="10" width="30" height="30" rx="3" stroke="#00C9A7" stroke-width="3"/>
+                        <rect x="10" y="60" width="30" height="30" rx="3" stroke="#00C9A7" stroke-width="3"/>
+                        <rect x="18" y="18" width="14" height="14" fill="#00C9A7"/>
+                        <rect x="68" y="18" width="14" height="14" fill="#00C9A7"/>
+                        <rect x="18" y="68" width="14" height="14" fill="#00C9A7"/>
+                        <rect x="60" y="60" width="10" height="10" fill="#00C9A7"/>
+                        <rect x="75" y="75" width="15" height="15" fill="#00C9A7"/>
+                    </svg>
+                </div>
+                <span>扫码添加微信</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Back to Top -->
+    <button class="back-to-top" id="backToTop" aria-label="回到顶部">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg>
+    </button>
+
+    <script src="script.js"></script>
+</body>
+</html>
