@@ -1,5 +1,5 @@
 /* ============================================
-   吉娃娃生物 - Chihuahua Bio
+   吉娃娃生物 - Genewawa
    Interactive Scripts
    ============================================ */
 
@@ -10,7 +10,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (canvas) {
         const ctx = canvas.getContext('2d');
         let particles = [];
-        let connections = [];
         let animFrame;
 
         function resize() {
@@ -201,7 +200,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }, observerOptions);
 
     // Observe service cards, product cards, advantage items
-    document.querySelectorAll('.service-card, .product-card, .advantage-item, .tech-feature').forEach(el => {
+    document.querySelectorAll('.service-card, .product-card, .advantage-item, .tech-feature, .custom-card, .news-card').forEach(el => {
         el.style.opacity = '0';
         el.style.transform = 'translateY(30px)';
         el.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
@@ -209,31 +208,86 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Stagger animation for grid items
-    document.querySelectorAll('.services-grid .service-card, .products-grid .product-card, .advantages-grid .advantage-item').forEach((el, i) => {
+    document.querySelectorAll('.services-grid .service-card, .products-grid .product-card, .advantages-grid .advantage-item, .custom-grid .custom-card, .news-grid .news-card').forEach((el, i) => {
         el.style.transitionDelay = `${i * 0.1}s`;
     });
 
-    // --- Form Submit ---
+    // --- Form Submit with Email ---
     const form = document.getElementById('inquiryForm');
     if (form) {
-        form.addEventListener('submit', (e) => {
+        form.addEventListener('submit', async (e) => {
             e.preventDefault();
             const btn = form.querySelector('.submit-btn');
             const originalText = btn.textContent;
             btn.textContent = '提交中...';
             btn.disabled = true;
 
+            // Get form data
+            const formData = new FormData(form);
+            const data = {
+                name: formData.get('name'),
+                phone: formData.get('phone'),
+                email: formData.get('email'),
+                sequence: formData.get('sequence'),
+                details: formData.get('details')
+            };
+
+            // Send email using EmailJS (or similar service)
+            // Using mailto as fallback for static site
+            const subject = encodeURIComponent(`【吉娃娃生物】在线询价 - ${data.name}`);
+            const body = encodeURIComponent(
+                `姓名：${data.name}\n` +
+                `电话：${data.phone}\n` +
+                `邮箱：${data.email || '未填写'}\n` +
+                `多肽序列/需求：${data.sequence || '未填写'}\n` +
+                `详细需求：\n${data.details || '未填写'}\n\n` +
+                `---\n此邮件来自吉娃娃生物官网在线询价表单`
+            );
+
+            // Try to send via mailto
+            const mailtoLink = `mailto:29152039@qq.com?subject=${subject}&body=${body}`;
+            
+            // Open mailto link
+            window.location.href = mailtoLink;
+
+            // Show success message
             setTimeout(() => {
                 btn.textContent = '✓ 提交成功！';
                 btn.style.background = 'linear-gradient(135deg, #10B981, #059669)';
+                
+                // Also try to send via Formspree as backup (if configured)
+                sendToFormspree(data);
+                
                 setTimeout(() => {
                     btn.textContent = originalText;
                     btn.style.background = '';
                     btn.disabled = false;
                     form.reset();
-                }, 2000);
+                }, 3000);
             }, 1000);
         });
+    }
+
+    // Helper function to send to Formspree (free form backend)
+    async function sendToFormspree(data) {
+        try {
+            // Using Formspree - you need to sign up and replace the endpoint
+            // For now, this is a placeholder that will fail gracefully
+            const response = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    ...data,
+                    _replyto: data.email,
+                    _subject: `【吉娃娃生物】在线询价 - ${data.name}`
+                })
+            });
+        } catch (e) {
+            // Silently fail - mailto is the primary method
+            console.log('Formspree not configured, using mailto');
+        }
     }
 
     // --- Smooth Scroll for Anchor Links ---

@@ -1,5 +1,5 @@
 /* ============================================
-   吉娃娃生物 - Chihuahua Bio
+   吉娃娃生物 - Genewawa
    Professional Peptide Biotech Homepage
    ============================================ */
 
@@ -141,7 +141,7 @@ img {
 
 .logo-en {
     font-family: var(--font-display);
-    font-size: 22px;
+    font-size: 26px;
     font-weight: 900;
     background: linear-gradient(135deg, var(--primary), var(--secondary));
     -webkit-background-clip: text;
@@ -705,6 +705,132 @@ img {
     gap: 8px;
 }
 
+/* --- Custom Detail Section --- */
+.custom-detail {
+    padding: 80px 0;
+    background: var(--bg-light);
+}
+
+.custom-intro {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 48px;
+}
+
+.custom-intro h3 {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 16px;
+}
+
+.custom-intro p {
+    font-size: 15px;
+    color: var(--text-light);
+    line-height: 1.8;
+}
+
+.custom-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    margin-bottom: 60px;
+}
+
+.custom-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 32px 24px;
+    text-align: center;
+    transition: all var(--transition);
+}
+
+.custom-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--primary);
+}
+
+.custom-icon {
+    font-size: 40px;
+    margin-bottom: 16px;
+}
+
+.custom-card h4 {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 10px;
+}
+
+.custom-card p {
+    font-size: 13px;
+    color: var(--text-light);
+    line-height: 1.6;
+}
+
+.custom-process {
+    background: var(--bg);
+    border-radius: var(--radius-lg);
+    padding: 40px;
+    border: 1px solid var(--border);
+}
+
+.custom-process h3 {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--dark);
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.process-steps {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.process-step {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.step-num {
+    width: 44px;
+    height: 44px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.step-content h4 {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 2px;
+}
+
+.step-content p {
+    font-size: 12px;
+    color: var(--text-light);
+}
+
+.process-arrow {
+    font-size: 24px;
+    color: var(--primary);
+    font-weight: 700;
+}
+
 /* --- Technology Section --- */
 .technology {
     padding: 80px 0;
@@ -1001,6 +1127,87 @@ img {
     line-height: 1.6;
 }
 
+/* --- News Section --- */
+.news {
+    padding: 80px 0;
+    background: var(--bg);
+}
+
+.news-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+}
+
+.news-card {
+    display: flex;
+    gap: 20px;
+    padding: 24px;
+    background: var(--bg-light);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    transition: all var(--transition);
+}
+
+.news-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--primary);
+}
+
+.news-date {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 70px;
+    padding: 12px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    border-radius: var(--radius-md);
+    color: white;
+}
+
+.news-day {
+    font-size: 28px;
+    font-weight: 900;
+    line-height: 1;
+}
+
+.news-month {
+    font-size: 12px;
+    margin-top: 4px;
+}
+
+.news-content {
+    flex: 1;
+}
+
+.news-content h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 8px;
+    line-height: 1.4;
+}
+
+.news-content p {
+    font-size: 13px;
+    color: var(--text-light);
+    line-height: 1.6;
+    margin-bottom: 12px;
+}
+
+.news-link {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--primary);
+    transition: color var(--transition);
+}
+
+.news-link:hover {
+    color: var(--secondary);
+}
+
 /* --- About Section --- */
 .about {
     padding: 80px 0;
@@ -1177,6 +1384,37 @@ img {
     color: var(--text-light);
 }
 
+.qr-section {
+    display: flex;
+    gap: 24px;
+    margin-top: 16px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+}
+
+.qr-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.qr-img {
+    width: 120px;
+    height: 120px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 8px;
+    background: var(--bg);
+    object-fit: contain;
+}
+
+.qr-item span {
+    font-size: 13px;
+    color: var(--text-light);
+    font-weight: 500;
+}
+
 .contact-form {
     background: var(--bg-light);
     border: 1px solid var(--border);
@@ -1254,6 +1492,11 @@ img {
     box-shadow: 0 4px 16px rgba(0,201,167,0.3);
 }
 
+.submit-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
 /* --- Footer --- */
 .footer {
     background: var(--dark);
@@ -1277,7 +1520,7 @@ img {
 
 .footer-logo-en {
     font-family: var(--font-display);
-    font-size: 20px;
+    font-size: 24px;
     font-weight: 900;
     color: white;
     line-height: 1.2;
@@ -1407,10 +1650,14 @@ img {
     gap: 6px;
 }
 
-.qr-placeholder {
-    padding: 8px;
+.float-qr-img {
+    width: 120px;
+    height: 120px;
     border: 1px solid var(--border);
     border-radius: var(--radius-sm);
+    padding: 8px;
+    background: var(--bg);
+    object-fit: contain;
 }
 
 .float-qr span {
@@ -1472,7 +1719,13 @@ img {
         max-width: 500px;
         margin: 0 auto;
     }
+    .custom-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
     .tech-banner {
+        grid-template-columns: 1fr;
+    }
+    .news-grid {
         grid-template-columns: 1fr;
     }
     .advantages-grid {
@@ -1539,11 +1792,31 @@ img {
     .hero-equipment {
         flex-direction: column;
     }
+    .custom-grid {
+        grid-template-columns: 1fr;
+    }
+    .custom-process {
+        padding: 24px;
+    }
+    .process-steps {
+        flex-direction: column;
+    }
+    .process-arrow {
+        transform: rotate(90deg);
+    }
     .products-grid {
         grid-template-columns: 1fr;
     }
     .product-card {
         grid-template-columns: 120px 1fr;
+    }
+    .news-card {
+        flex-direction: column;
+    }
+    .news-date {
+        flex-direction: row;
+        min-width: auto;
+        gap: 8px;
     }
     .advantages-grid {
         grid-template-columns: 1fr 1fr;
@@ -1565,6 +1838,10 @@ img {
     }
     .about-highlights {
         grid-template-columns: 1fr;
+    }
+    .qr-section {
+        flex-direction: column;
+        align-items: center;
     }
     .form-row {
         grid-template-columns: 1fr;
