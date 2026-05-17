@@ -1337,16 +1337,13 @@ img {
     background: var(--bg);
 }
 
-.contact-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 48px;
-}
-
-.contact-info {
+.contact-info-full {
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 24px;
+    max-width: 800px;
+    margin: 0 auto;
 }
 
 .contact-item {
@@ -1842,6 +1839,9 @@ img {
     .qr-section {
         flex-direction: column;
         align-items: center;
+    }
+    .contact-info-full {
+        align-items: stretch;
     }
     .form-row {
         grid-template-columns: 1fr;
