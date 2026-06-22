@@ -246,34 +246,44 @@ document.addEventListener('DOMContentLoaded', () => {
     // ============================================
     // AI Plan Generator
     // ============================================
-    const aiPlanBtn = document.getElementById('aiPlanBtn');
-    const aiModalOverlay = document.getElementById('aiModalOverlay');
-    const aiModalClose = document.getElementById('aiModalClose');
-    const aiGenerateBtn = document.getElementById('aiGenerateBtn');
-    const aiRegenerateBtn = document.getElementById('aiRegenerateBtn');
-    const aiDownloadBtn = document.getElementById('aiDownloadBtn');
-    const aiRetryBtn = document.getElementById('aiRetryBtn');
 
-    const aiStepInput = document.getElementById('aiStepInput');
-    const aiStepLoading = document.getElementById('aiStepLoading');
-    const aiStepResult = document.getElementById('aiStepResult');
-    const aiStepError = document.getElementById('aiStepError');
+    // Helper: safely get element
+    function $(id) { return document.getElementById(id); }
 
-    const aiDesc = document.getElementById('aiDesc');
-    const aiName = document.getElementById('aiName');
-    const aiPhone = document.getElementById('aiPhone');
-    const aiEmail = document.getElementById('aiEmail');
-    const aiLoadingText = document.getElementById('aiLoadingText');
-    const aiProgressFill = document.getElementById('aiProgressFill');
-    const aiResultContent = document.getElementById('aiResultContent');
-    const aiErrorText = document.getElementById('aiErrorText');
+    const aiPlanBtn = $('aiPlanBtn');
+    const aiModalOverlay = $('aiModalOverlay');
+    const aiModalClose = $('aiModalClose');
+    const aiGenerateBtn = $('aiGenerateBtn');
+    const aiRegenerateBtn = $('aiRegenerateBtn');
+    const aiDownloadBtn = $('aiDownloadBtn');
+    const aiRetryBtn = $('aiRetryBtn');
+
+    const aiStepInput = $('aiStepInput');
+    const aiStepLoading = $('aiStepLoading');
+    const aiStepResult = $('aiStepResult');
+    const aiStepError = $('aiStepError');
+
+    const aiDesc = $('aiDesc');
+    const aiName = $('aiName');
+    const aiPhone = $('aiPhone');
+    const aiEmail = $('aiEmail');
+    const aiLoadingText = $('aiLoadingText');
+    const aiProgressFill = $('aiProgressFill');
+    const aiResultContent = $('aiResultContent');
+    const aiErrorText = $('aiErrorText');
 
     let currentPlanText = '';
     let currentPlanHtml = '';
+    let currentCustomerInfo = {};
 
     // AGENS API Configuration
     const AGENS_API_URL = 'https://apihub.agnes-ai.com/v1/chat/completions';
     const AGENS_API_KEY = 'sk-wvjRUdJZUq37FzP1lZMLKgrL3tqtuaP7xqeNaEbc1pYjIonG';
+
+    // EmailJS Configuration (for sending emails from frontend)
+    const EMAILJS_SERVICE_ID = 'service_genewawa';
+    const EMAILJS_TEMPLATE_ID = 'template_inquiry';
+    const EMAILJS_PUBLIC_KEY = 'YOUR_PUBLIC_KEY'; // Will use mailto fallback
 
     // Knowledge base context for better AI responses
     const KB_CONTEXT = `你是一位资深多肽合成与设计专家，精通Fmoc固相多肽合成(SPPS)、多肽修饰、质量控制等领域。请基于以下专业知识生成方案：
@@ -302,36 +312,39 @@ document.addEventListener('DOMContentLoaded', () => {
 - 避免长疏水序列(>5连续疏水aa)`;
 
     function openModal() {
+        if (!aiModalOverlay) { console.error('Modal overlay not found'); return; }
         aiModalOverlay.classList.add('active');
         document.body.style.overflow = 'hidden';
         resetForm();
     }
 
     function closeModal() {
+        if (!aiModalOverlay) return;
         aiModalOverlay.classList.remove('active');
         document.body.style.overflow = '';
     }
 
     function resetForm() {
         showStep('input');
-        aiDesc.value = '';
-        aiName.value = '';
-        aiPhone.value = '';
-        aiEmail.value = '';
+        if (aiDesc) aiDesc.value = '';
+        if (aiName) aiName.value = '';
+        if (aiPhone) aiPhone.value = '';
+        if (aiEmail) aiEmail.value = '';
         currentPlanText = '';
         currentPlanHtml = '';
+        currentCustomerInfo = {};
     }
 
     function showStep(step) {
-        aiStepInput.style.display = step === 'input' ? 'block' : 'none';
-        aiStepLoading.style.display = step === 'loading' ? 'block' : 'none';
-        aiStepResult.style.display = step === 'result' ? 'block' : 'none';
-        aiStepError.style.display = step === 'error' ? 'block' : 'none';
+        if (aiStepInput) aiStepInput.style.display = step === 'input' ? 'block' : 'none';
+        if (aiStepLoading) aiStepLoading.style.display = step === 'loading' ? 'block' : 'none';
+        if (aiStepResult) aiStepResult.style.display = step === 'result' ? 'block' : 'none';
+        if (aiStepError) aiStepError.style.display = step === 'error' ? 'block' : 'none';
     }
 
     function setLoadingProgress(percent, text) {
-        aiProgressFill.style.width = percent + '%';
-        if (text) aiLoadingText.textContent = text;
+        if (aiProgressFill) aiProgressFill.style.width = percent + '%';
+        if (aiLoadingText && text) aiLoadingText.textContent = text;
     }
 
     function escapeHtml(text) {
@@ -341,27 +354,18 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function markdownToHtml(md) {
-        // Simple markdown to HTML converter
         let html = escapeHtml(md);
-        // Headers
         html = html.replace(/^#### (.*$)/gim, '<h4>$1</h4>');
         html = html.replace(/^### (.*$)/gim, '<h3>$1</h3>');
         html = html.replace(/^## (.*$)/gim, '<h2>$1</h2>');
         html = html.replace(/^# (.*$)/gim, '<h1>$1</h1>');
-        // Bold
         html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-        // Italic
         html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
-        // Code
         html = html.replace(/`([^`]+)`/g, '<code style="background:#f1f5f9;padding:2px 6px;border-radius:4px;font-size:12px;">$1</code>');
-        // Lists
         html = html.replace(/^\- (.*$)/gim, '<li>$1</li>');
         html = html.replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>');
-        // Numbered lists
         html = html.replace(/^\d+\. (.*$)/gim, '<li>$1</li>');
-        // Line breaks
         html = html.replace(/\n/g, '<br>');
-        // Fix multiple br
         html = html.replace(/(<br>){3,}/g, '<br><br>');
         return html;
     }
@@ -449,7 +453,45 @@ ${desc}
         return data.choices[0].message.content;
     }
 
+    // Send customer inquiry via mailto + form-submit fallback
+    function sendCustomerInfo(name, phone, email, desc, planText) {
+        const subject = encodeURIComponent(`[吉娃娃生物] 多肽定制方案咨询 - ${name || '新客户'}`);
+        const body = encodeURIComponent(
+            `客户信息：\n` +
+            `姓名：${name || '未提供'}\n` +
+            `电话：${phone || '未提供'}\n` +
+            `邮箱：${email || '未提供'}\n\n` +
+            `需求描述：\n${desc}\n\n` +
+            `--- AI生成方案 ---\n${planText ? planText.substring(0, 2000) : '（方案生成中）'}\n\n` +
+            `--- 系统信息 ---\n提交时间：${new Date().toLocaleString('zh-CN')}\n来源：吉娃娃生物官网AI方案生成器`
+        );
+
+        // Open mailto link
+        window.open(`mailto:29152039@qq.com?subject=${subject}&body=${body}`, '_blank');
+    }
+
+    // Also try to submit to a form endpoint if available (Formspree as fallback)
+    async function submitToFormspree(name, phone, email, desc) {
+        try {
+            const formData = new FormData();
+            formData.append('name', name || '未提供');
+            formData.append('phone', phone || '未提供');
+            formData.append('email', email || '未提供');
+            formData.append('message', desc);
+            formData.append('_subject', `[吉娃娃生物] 多肽定制方案咨询 - ${name || '新客户'}`);
+
+            await fetch('https://formspree.io/f/YOUR_FORM_ID', {
+                method: 'POST',
+                body: formData,
+                headers: { 'Accept': 'application/json' }
+            });
+        } catch (e) {
+            // Silently fail - mailto is the primary method
+        }
+    }
+
     async function generatePlan() {
+        if (!aiDesc) return;
         const desc = aiDesc.value.trim();
         if (!desc) {
             alert('请填写需求描述');
@@ -457,21 +499,23 @@ ${desc}
             return;
         }
 
-        const name = aiName.value.trim();
-        const phone = aiPhone.value.trim();
-        const email = aiEmail.value.trim();
+        const name = aiName ? aiName.value.trim() : '';
+        const phone = aiPhone ? aiPhone.value.trim() : '';
+        const email = aiEmail ? aiEmail.value.trim() : '';
+
+        // Save customer info for email
+        currentCustomerInfo = { name, phone, email, desc };
 
         showStep('loading');
         setLoadingProgress(10, '正在分析需求...');
 
-        // Simulate progress
         const progressInterval = setInterval(() => {
-            const current = parseInt(aiProgressFill.style.width) || 10;
+            const current = parseInt(aiProgressFill ? aiProgressFill.style.width : '10') || 10;
             if (current < 80) {
-                setLoadingProgress(current + Math.random() * 15, 
-                    current < 30 ? '正在分析需求...' : 
-                    current < 50 ? '正在设计多肽序列与参数...' : 
-                    current < 65 ? '正在制定合成与修饰方案...' : 
+                setLoadingProgress(current + Math.random() * 15,
+                    current < 30 ? '正在分析需求...' :
+                    current < 50 ? '正在设计多肽序列与参数...' :
+                    current < 65 ? '正在制定合成与修饰方案...' :
                     '正在生成质控标准与报价...');
             }
         }, 800);
@@ -486,16 +530,18 @@ ${desc}
             currentPlanText = result;
             currentPlanHtml = markdownToHtml(result);
 
-            // Small delay for UX
+            // Send email with customer info and plan
+            sendCustomerInfo(name, phone, email, desc, currentPlanText);
+
             setTimeout(() => {
-                aiResultContent.innerHTML = currentPlanHtml;
+                if (aiResultContent) aiResultContent.innerHTML = currentPlanHtml;
                 showStep('result');
             }, 500);
 
         } catch (error) {
             clearInterval(progressInterval);
             console.error('AI Plan generation error:', error);
-            aiErrorText.textContent = error.message || '网络连接失败，请检查网络后重试';
+            if (aiErrorText) aiErrorText.textContent = error.message || '网络连接失败，请检查网络后重试';
             showStep('error');
         }
     }
@@ -561,46 +607,57 @@ ${desc}
         URL.revokeObjectURL(url);
     }
 
-    // Event Listeners
-    if (aiPlanBtn) {
-        aiPlanBtn.addEventListener('click', openModal);
-    }
+    // Bind all event listeners with null checks
+    function bindEvents() {
+        if (aiPlanBtn) {
+            aiPlanBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                openModal();
+            });
+        } else {
+            console.error('aiPlanBtn not found');
+        }
 
-    if (aiModalClose) {
-        aiModalClose.addEventListener('click', closeModal);
-    }
+        if (aiModalClose) {
+            aiModalClose.addEventListener('click', closeModal);
+        }
 
-    if (aiModalOverlay) {
-        aiModalOverlay.addEventListener('click', (e) => {
-            if (e.target === aiModalOverlay) closeModal();
-        });
-    }
+        if (aiModalOverlay) {
+            aiModalOverlay.addEventListener('click', (e) => {
+                if (e.target === aiModalOverlay) closeModal();
+            });
+        }
 
-    if (aiGenerateBtn) {
-        aiGenerateBtn.addEventListener('click', generatePlan);
-    }
-
-    if (aiRegenerateBtn) {
-        aiRegenerateBtn.addEventListener('click', () => {
-            showStep('input');
-        });
-    }
-
-    if (aiDownloadBtn) {
-        aiDownloadBtn.addEventListener('click', downloadPlan);
-    }
-
-    if (aiRetryBtn) {
-        aiRetryBtn.addEventListener('click', generatePlan);
-    }
-
-    // Enter key to submit
-    if (aiDesc) {
-        aiDesc.addEventListener('keydown', (e) => {
-            if (e.ctrlKey && e.key === 'Enter') {
+        if (aiGenerateBtn) {
+            aiGenerateBtn.addEventListener('click', function(e) {
+                e.preventDefault();
                 generatePlan();
-            }
-        });
+            });
+        }
+
+        if (aiRegenerateBtn) {
+            aiRegenerateBtn.addEventListener('click', () => showStep('input'));
+        }
+
+        if (aiDownloadBtn) {
+            aiDownloadBtn.addEventListener('click', downloadPlan);
+        }
+
+        if (aiRetryBtn) {
+            aiRetryBtn.addEventListener('click', generatePlan);
+        }
+
+        if (aiDesc) {
+            aiDesc.addEventListener('keydown', (e) => {
+                if (e.ctrlKey && e.key === 'Enter') {
+                    generatePlan();
+                }
+            });
+        }
     }
+
+    // Initialize
+    bindEvents();
 
 });
