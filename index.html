@@ -62,6 +62,7 @@
                 <li class="nav-item"><a href="#products">产品中心</a></li>
                 <li class="nav-item"><a href="#cases">客户案例</a></li>
                 <li class="nav-item"><a href="#news">公司资讯</a></li>
+                <li class="nav-item"><a href="#tech">技术积累</a></li>
                 <li class="nav-item"><a href="#about">关于吉娃娃</a></li>
                 <li class="nav-item"><a href="#contact">联系吉娃娃</a></li>
             </ul>
@@ -571,6 +572,287 @@
                     <div class="news-content">
                         <h3>2024年春节放假通知</h3>
                         <p>公司春节放假时间为2024年2月8日至2月17日，放假期间在线询价正常接收，节后统一处理。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Knowledge Section -->
+    <section class="tech-knowledge" id="tech">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">技术积累</h2>
+                <p class="section-subtitle">Technical Expertise</p>
+                <div class="title-line"></div>
+                <p class="section-desc-text">基于多年多肽合成、修饰与定制的实践经验，我们系统梳理了关键操作SOP、核心技术难点与行业发展趋势，为科研客户提供专业的技术参考。</p>
+            </div>
+
+            <!-- Tab Navigation -->
+            <div class="tech-tabs">
+                <button class="tech-tab active" data-tab="sop">合成SOP</button>
+                <button class="tech-tab" data-tab="modify">修饰技术</button>
+                <button class="tech-tab" data-tab="difficulty">技术难点</button>
+                <button class="tech-tab" data-tab="trend">发展趋势</button>
+            </div>
+
+            <!-- Tab: SOP -->
+            <div class="tech-tab-content active" id="tab-sop">
+                <div class="tech-panel">
+                    <h3>Fmoc固相合成标准循环（SPPS）</h3>
+                    <p class="tech-intro">Fmoc-SPPS是现代多肽合成的主流方法，覆盖超过95%的多肽生产需求。每添加一个氨基酸需经历五个标准步骤。</p>
+
+                    <div class="sop-steps-grid">
+                        <div class="sop-step-card">
+                            <div class="sop-step-num">01</div>
+                            <h4>树脂预处理与溶胀</h4>
+                            <p>干燥树脂加入反应器，加入足量DCM或DMF，室温搅拌或氮气鼓泡15-30分钟。DCM对聚苯乙烯树脂有极强溶剂化能力，体积膨胀3-6倍，打开纳米级孔隙通道，为后续试剂扩散创造条件。</p>
+                        </div>
+                        <div class="sop-step-card">
+                            <div class="sop-step-num">02</div>
+                            <h4>Fmoc脱保护</h4>
+                            <p>加入20%哌啶/DMF溶液，反应5-10分钟（通常2×5分钟）。哌啶不仅是碱，更是亲核试剂，捕获脱保护产生的二苯富烯中间体，防止其攻击肽链。N端为脯氨酸或N-烷基化氨基酸时，需延长至10-15分钟。</p>
+                        </div>
+                        <div class="sop-step-card">
+                            <div class="sop-step-num">03</div>
+                            <h4>脱保护后洗涤</h4>
+                            <p>DMF快速洗涤树脂4-6次，每次洗涤液体积为树脂床体积的5-10倍。核心目的是移除所有哌啶及副产物，残留哌啶会中和偶联试剂，严重降低偶联效率。</p>
+                        </div>
+                        <div class="sop-step-card">
+                            <div class="sop-step-num">04</div>
+                            <h4>氨基酸活化与偶联</h4>
+                            <p>Fmoc-AA-OH(3-5当量)+偶联试剂(如HATU/HBTU,3-5当量)+碱(DIEA,6-10当量)于DMF中预活化30-60秒，加入树脂反应30-60分钟。Val,Ile,Thr等β-分支氨基酸需延长至60-90分钟。</p>
+                        </div>
+                        <div class="sop-step-card">
+                            <div class="sop-step-num">05</div>
+                            <h4>偶联后洗涤</h4>
+                            <p>同步骤3，DMF洗涤4-6次，确保完全移除未反应试剂和副产物。可穿插1-2次DCM洗涤进行深度清洁。</p>
+                        </div>
+                    </div>
+
+                    <div class="tech-sub-section">
+                        <h4>裂解与粗品处理</h4>
+                        <p>标准切割液：TFA/TIS/水（体积比95:2.5:2.5），反应2-4小时。冰冷乙醚沉淀粗肽，离心收集。含Cys、Met、Trp的肽需添加适当清除剂防止副反应。粗品经LC-MS初筛确认分子量和主要副产物。</p>
+                    </div>
+
+                    <div class="tech-sub-section">
+                        <h4>质控检测标准</h4>
+                        <div class="tech-table-wrap">
+                            <table>
+                                <thead>
+                                    <tr><th>检测项目</th><th>方法</th><th>标准</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>分子量确认</td><td>ESI-MS / MALDI-TOF</td><td>[M+H]+偏差≤0.5Da</td></tr>
+                                    <tr><td>纯度</td><td>RP-HPLC (215nm/220nm)</td><td>科研级≥95%，药用级≥98%</td></tr>
+                                    <tr><td>序列确认</td><td>MS/MS串联质谱</td><td>覆盖度≥80%</td></tr>
+                                    <tr><td>水分</td><td>Karl Fischer</td><td>≤5%</td></tr>
+                                    <tr><td>内毒素</td><td>LAL法</td><td>细胞实验级&lt;1EU/mg</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab: Modification -->
+            <div class="tech-tab-content" id="tab-modify">
+                <div class="tech-panel">
+                    <h3>多肽修饰技术与SOP</h3>
+                    <p class="tech-intro">依据修饰位点，多肽修饰分为主链修饰、侧链修饰、末端修饰三大类，构建了丰富的"化学工具箱"。</p>
+
+                    <div class="modify-grid">
+                        <div class="modify-card">
+                            <div class="modify-badge">主链修饰</div>
+                            <h4>骨架改造</h4>
+                            <p>N-甲基化、D-氨基酸替代、β/γ-氨基酸引入、硫酰胺、骨架环化。主要提升抗蛋白酶降解能力和构象稳定性。</p>
+                        </div>
+                        <div class="modify-card">
+                            <div class="modify-badge">侧链修饰</div>
+                            <h4>功能基团引入</h4>
+                            <p>磷酸化(Ser/Thr/Tyr)、糖基化(Asn/Ser/Thr)、甲基化(Lys/Arg)、乙酰化、脂肪酰化等。</p>
+                        </div>
+                        <div class="modify-card">
+                            <div class="modify-badge">末端修饰</div>
+                            <h4>端基工程</h4>
+                            <p>N端乙酰化/Pyr修饰/脂肪酸修饰/荧光标记；C端酰胺化/酯化/PEG化/Fc偶联。</p>
+                        </div>
+                    </div>
+
+                    <div class="tech-sub-section">
+                        <h4>常见修饰类型</h4>
+                        <div class="modify-types-grid">
+                            <div class="modify-type">
+                                <h5>N端乙酰化</h5>
+                                <p>醋酸酐(5-10eq) + DIEA(2-5eq)，室温反应30-60分钟</p>
+                            </div>
+                            <div class="modify-type">
+                                <h5>磷酸化修饰</h5>
+                                <p>采用Fmoc-Ser(PO(OBzl)OH)等预保护单体直接引入，裂解时需降低TFA温度</p>
+                            </div>
+                            <div class="modify-type">
+                                <h5>脂肪酸修饰</h5>
+                                <p>在Lys侧链ε-氨基上偶联C12-C18脂肪酸，如利拉鲁肽C16修饰延长半衰期</p>
+                            </div>
+                            <div class="modify-type">
+                                <h5>PEG修饰</h5>
+                                <p>mPEG-NHS酯(1-5eq)，pH8-9条件下与N端或Lys侧链反应，室温1-4小时</p>
+                            </div>
+                            <div class="modify-type">
+                                <h5>环化</h5>
+                                <p>头-尾环化、二硫键成环、订书肽(Stapled peptide)等</p>
+                            </div>
+                            <div class="modify-type">
+                                <h5>荧光/生物素标记</h5>
+                                <p>FITC(1.2eq)避光反应2-4小时；生物素可用Fmoc-Lys(Biotin)-OH直接引入</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tech-sub-section">
+                        <h4>多肽难度评估等级</h4>
+                        <div class="tech-table-wrap">
+                            <table>
+                                <thead>
+                                    <tr><th>等级</th><th>特征</th><th>常见问题</th><th>交付周期</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="highlight-row"><td>A级</td><td>短肽&lt;15aa，无复杂修饰</td><td>偶联效率高，纯化容易</td><td>5-8天</td></tr>
+                                    <tr><td>B级</td><td>15-30aa，单修饰或疏水序列</td><td>部分氨基酸难偶联</td><td>8-14天</td></tr>
+                                    <tr><td>C级</td><td>&gt;30aa，复杂修饰、二硫键</td><td>聚集、低溶解、复杂副产物</td><td>2-6周</td></tr>
+                                    <tr><td>D级</td><td>多PTM、高疏水/易氧化</td><td>低回收、难纯化、稳定性差</td><td>依项目而定</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab: Difficulty -->
+            <div class="tech-tab-content" id="tab-difficulty">
+                <div class="tech-panel">
+                    <h3>核心技术难点</h3>
+                    <p class="tech-intro">多肽合成中最常见也最棘手的问题是偶联效率"断崖式下跌"，根源在于肽链聚集效应叠加氨基酸自身的空间位阻/极性特征。</p>
+
+                    <div class="difficulty-grid">
+                        <div class="difficulty-card">
+                            <div class="difficulty-icon">⚠️</div>
+                            <h4>偶联效率断崖式下跌</h4>
+                            <p>肽链>8-10个残基时，疏水侧链驱动折叠聚集，末端氨基被包裹，偶联效率从80%骤降至40%以下。</p>
+                            <div class="difficulty-solutions">
+                                <strong>应对策略：</strong>
+                                <span>添加助溶剂(DMSO/NMP)</span>
+                                <span>微波辅助合成(60-75℃)</span>
+                                <span>双重偶联</span>
+                                <span>低载量树脂(0.1-0.3mmol/g)</span>
+                                <span>伪脯氨酸(ψPro)引入</span>
+                            </div>
+                        </div>
+                        <div class="difficulty-card">
+                            <div class="difficulty-icon">🔄</div>
+                            <h4>消旋化控制</h4>
+                            <p>易消旋氨基酸：Cys > His > Phe > Ser。活化过程中α-碳质子被碱提取形成烯醇式中间体，再质子化时产生D/L异构体。</p>
+                            <div class="difficulty-solutions">
+                                <strong>应对策略：</strong>
+                                <span>选用高效低消旋偶联剂(HATU)</span>
+                                <span>降低反应温度</span>
+                                <span>减少反应时间</span>
+                            </div>
+                        </div>
+                        <div class="difficulty-card">
+                            <div class="difficulty-icon">🔗</div>
+                            <h4>长链肽与超长肽合成</h4>
+                            <p>每步偶联效率即使达到99.5%，合成50aa的理论收率仅约78%，实际更低。</p>
+                            <div class="difficulty-solutions">
+                                <strong>应对策略：</strong>
+                                <span>分段合成+片段缩合法</span>
+                                <span>类核糖体分子反应器(RMMR)</span>
+                                <span>连续流合成技术</span>
+                            </div>
+                        </div>
+                        <div class="difficulty-card">
+                            <div class="difficulty-icon">🧪</div>
+                            <h4>纯化瓶颈</h4>
+                            <p>纯化环节占总制造成本的50%以上。缺失序列、截断序列、消旋产物与目标肽物化性质极其接近。</p>
+                            <div class="difficulty-solutions">
+                                <strong>应对策略：</strong>
+                                <span>多轮纯化(RP-HPLC+离子交换+SEC)</span>
+                                <span>制备色谱方法精确建模</span>
+                                <span>梯度/流速/温度系统优化</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab: Trend -->
+            <div class="tech-tab-content" id="tab-trend">
+                <div class="tech-panel">
+                    <h3>未来发展趋势</h3>
+                    <p class="tech-intro">多肽合成已从"批次艺术"进入"连续流制造"时代。未来5年的赢家将是最早跑通AI辅助设计+连续流绿色制造+自动化质控闭环的企业。</p>
+
+                    <div class="trend-grid">
+                        <div class="trend-card">
+                            <div class="trend-num">01</div>
+                            <h4>连续流多肽合成</h4>
+                            <p>连续流固相合成(CF-SPPS)和连续流液相合成(CF-LPPS)正从实验室走向工业规模，实现极致的传质传热效率、试剂用量减少90%以上、反应时间大幅缩短。</p>
+                        </div>
+                        <div class="trend-card">
+                            <div class="trend-num">02</div>
+                            <h4>AI驱动的智能化合成</h4>
+                            <p>深度学习预测偶联效率、选择最优合成策略；机器人工作站+高通量筛选，实现"计算设计-自动合成-筛选"闭环；预测聚集倾向、化学降解路径。</p>
+                        </div>
+                        <div class="trend-card">
+                            <div class="trend-num">03</div>
+                            <h4>绿色化学转型</h4>
+                            <p>Fmoc/Pic策略替代Fmoc/tBu减少TFA依赖；水性固相合成(ASPPS)完全消除DMF和TFA；绿色溶剂(乙酸酯、γ-戊内酯)替代传统有机溶剂。</p>
+                        </div>
+                        <div class="trend-card">
+                            <div class="trend-num">04</div>
+                            <h4>复杂多肽与PDC</h4>
+                            <p>长链肽、环肽、多肽偶联药物(PDC)是下一个竞争焦点。PDC进入2.0时代：双靶向肽+免疫激动剂/蛋白降解剂载荷；多靶点激动剂合成需求激增。</p>
+                        </div>
+                    </div>
+
+                    <div class="trend-market">
+                        <h4>多肽行业关键市场数据</h4>
+                        <div class="market-stats">
+                            <div class="market-stat">
+                                <div class="market-num">51.5亿$</div>
+                                <div class="market-label">2025年全球多肽API市场</div>
+                            </div>
+                            <div class="market-stat">
+                                <div class="market-num">15.24%</div>
+                                <div class="market-label">年复合增长率(CAGR)</div>
+                            </div>
+                            <div class="market-stat">
+                                <div class="market-num">120.5亿$</div>
+                                <div class="market-label">2031年预计API市场规模</div>
+                            </div>
+                            <div class="market-stat">
+                                <div class="market-num">700亿$+</div>
+                                <div class="market-label">GLP-1类药物年销售额</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tech-sub-section">
+                        <h4>制造范式转型</h4>
+                        <div class="tech-table-wrap">
+                            <table>
+                                <thead>
+                                    <tr><th>维度</th><th>传统模式</th><th>未来模式</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>合成方式</td><td>批次式SPPS</td><td>连续流SPPS/LPPS</td></tr>
+                                    <tr><td>优化手段</td><td>经验试错</td><td>AI驱动+自动化闭环</td></tr>
+                                    <tr><td>溶剂体系</td><td>DMF/DCM/TFA</td><td>绿色溶剂/水性体系</td></tr>
+                                    <tr><td>质控模式</td><td>离线检测</td><td>在线实时UV监测</td></tr>
+                                    <tr><td>产能规模</td><td>百公斤级</td><td>吨级(GLP-1驱动)</td></tr>
+                                    <tr><td>竞争焦点</td><td>产能规模</td><td>技术深度+合规交付</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>

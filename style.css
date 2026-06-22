@@ -1208,6 +1208,473 @@ img {
     color: var(--secondary);
 }
 
+/* --- Tech Knowledge Section --- */
+.tech-knowledge {
+    padding: 80px 0;
+    background: var(--bg-light);
+}
+
+.section-desc-text {
+    font-size: 15px;
+    color: var(--text-light);
+    max-width: 800px;
+    margin: 16px auto 0;
+    line-height: 1.8;
+}
+
+.tech-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+}
+
+.tech-tab {
+    padding: 10px 24px;
+    border: 2px solid var(--border);
+    border-radius: var(--radius-xl);
+    background: var(--bg);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    cursor: pointer;
+    transition: all var(--transition);
+    font-family: var(--font-cn);
+}
+
+.tech-tab:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.tech-tab.active {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    border-color: transparent;
+    color: white;
+}
+
+.tech-tab-content {
+    display: none;
+}
+
+.tech-tab-content.active {
+    display: block;
+    animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.tech-panel {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 40px;
+}
+
+.tech-panel h3 {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 8px;
+}
+
+.tech-intro {
+    font-size: 14px;
+    color: var(--text-light);
+    line-height: 1.7;
+    margin-bottom: 32px;
+}
+
+/* SOP Steps Grid */
+.sop-steps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin-bottom: 32px;
+}
+
+.sop-step-card {
+    background: var(--bg-light);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 24px;
+    transition: all var(--transition);
+    position: relative;
+}
+
+.sop-step-card:hover {
+    border-color: var(--primary);
+    box-shadow: var(--shadow-md);
+}
+
+.sop-step-num {
+    font-family: var(--font-display);
+    font-size: 32px;
+    font-weight: 900;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+    margin-bottom: 12px;
+}
+
+.sop-step-card h4 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 8px;
+}
+
+.sop-step-card p {
+    font-size: 13px;
+    color: var(--text-light);
+    line-height: 1.7;
+}
+
+.tech-sub-section {
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+}
+
+.tech-sub-section h4 {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 12px;
+}
+
+.tech-sub-section p {
+    font-size: 14px;
+    color: var(--text-light);
+    line-height: 1.7;
+}
+
+/* Tech Tables */
+.tech-table-wrap {
+    overflow-x: auto;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    margin-top: 12px;
+}
+
+.tech-table-wrap table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+}
+
+.tech-table-wrap thead th {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    font-weight: 600;
+    text-align: left;
+    padding: 10px 14px;
+    white-space: nowrap;
+}
+
+.tech-table-wrap tbody td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+}
+
+.tech-table-wrap tbody tr:nth-child(even) {
+    background: var(--bg-light);
+}
+
+.tech-table-wrap tbody tr:hover {
+    background: rgba(0,201,167,0.05);
+}
+
+.tech-table-wrap .highlight-row {
+    background: rgba(0,201,167,0.08) !important;
+    font-weight: 600;
+}
+
+/* Modification Cards */
+.modify-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 32px;
+}
+
+.modify-card {
+    background: var(--bg-light);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 24px;
+    transition: all var(--transition);
+}
+
+.modify-card:hover {
+    border-color: var(--primary);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+}
+
+.modify-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    font-size: 11px;
+    font-weight: 600;
+    border-radius: var(--radius-xl);
+    margin-bottom: 12px;
+}
+
+.modify-card h4 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 8px;
+}
+
+.modify-card p {
+    font-size: 13px;
+    color: var(--text-light);
+    line-height: 1.6;
+}
+
+.modify-types-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+}
+
+.modify-type {
+    background: var(--bg-light);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 16px;
+    transition: all var(--transition);
+}
+
+.modify-type:hover {
+    border-color: var(--primary);
+}
+
+.modify-type h5 {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 6px;
+}
+
+.modify-type p {
+    font-size: 12px;
+    color: var(--text-light);
+    line-height: 1.6;
+}
+
+/* Difficulty Cards */
+.difficulty-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+}
+
+.difficulty-card {
+    background: var(--bg-light);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 28px;
+    transition: all var(--transition);
+}
+
+.difficulty-card:hover {
+    border-color: var(--primary);
+    box-shadow: var(--shadow-md);
+}
+
+.difficulty-icon {
+    font-size: 28px;
+    margin-bottom: 12px;
+}
+
+.difficulty-card h4 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 8px;
+}
+
+.difficulty-card > p {
+    font-size: 13px;
+    color: var(--text-light);
+    line-height: 1.7;
+    margin-bottom: 14px;
+}
+
+.difficulty-solutions {
+    background: rgba(0,201,167,0.05);
+    border: 1px solid rgba(0,201,167,0.15);
+    border-radius: var(--radius-sm);
+    padding: 14px;
+}
+
+.difficulty-solutions strong {
+    display: block;
+    font-size: 13px;
+    color: var(--primary);
+    margin-bottom: 8px;
+}
+
+.difficulty-solutions span {
+    display: inline-block;
+    font-size: 12px;
+    color: var(--text);
+    background: var(--bg);
+    padding: 4px 10px;
+    border-radius: var(--radius-xl);
+    margin: 3px 4px 3px 0;
+    border: 1px solid var(--border);
+}
+
+/* Trend Cards */
+.trend-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin-bottom: 32px;
+}
+
+.trend-card {
+    background: var(--bg-light);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 28px;
+    transition: all var(--transition);
+    position: relative;
+}
+
+.trend-card:hover {
+    border-color: var(--primary);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+}
+
+.trend-num {
+    font-family: var(--font-display);
+    font-size: 36px;
+    font-weight: 900;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+    margin-bottom: 12px;
+}
+
+.trend-card h4 {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 10px;
+}
+
+.trend-card p {
+    font-size: 13px;
+    color: var(--text-light);
+    line-height: 1.7;
+}
+
+/* Market Stats */
+.trend-market {
+    background: linear-gradient(135deg, var(--dark) 0%, var(--dark-light) 100%);
+    border-radius: var(--radius-lg);
+    padding: 32px;
+    margin-bottom: 32px;
+}
+
+.trend-market h4 {
+    font-size: 17px;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 20px;
+}
+
+.market-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.market-stat {
+    text-align: center;
+    padding: 16px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: var(--radius-md);
+}
+
+.market-num {
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 900;
+    background: linear-gradient(135deg, var(--primary), #34D399);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.1;
+    margin-bottom: 6px;
+}
+
+.market-label {
+    font-size: 12px;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.4;
+}
+
+/* Responsive for Tech Section */
+@media (max-width: 1024px) {
+    .modify-grid {
+        grid-template-columns: 1fr;
+    }
+    .modify-types-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .difficulty-grid {
+        grid-template-columns: 1fr;
+    }
+    .trend-grid {
+        grid-template-columns: 1fr;
+    }
+    .market-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .tech-panel {
+        padding: 24px 18px;
+    }
+    .sop-steps-grid {
+        grid-template-columns: 1fr;
+    }
+    .modify-types-grid {
+        grid-template-columns: 1fr;
+    }
+    .market-stats {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+    }
+    .tech-tabs {
+        gap: 6px;
+    }
+    .tech-tab {
+        padding: 8px 16px;
+        font-size: 13px;
+    }
+}
+
 /* --- About Section --- */
 .about {
     padding: 80px 0;

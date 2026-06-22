@@ -212,6 +212,22 @@ document.addEventListener('DOMContentLoaded', () => {
         el.style.transitionDelay = `${i * 0.1}s`;
     });
 
+    // --- Tech Knowledge Tab Switching ---
+    const techTabs = document.querySelectorAll('.tech-tab');
+    const techContents = document.querySelectorAll('.tech-tab-content');
+    if (techTabs.length > 0) {
+        techTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const target = tab.getAttribute('data-tab');
+                techTabs.forEach(t => t.classList.remove('active'));
+                techContents.forEach(c => c.classList.remove('active'));
+                tab.classList.add('active');
+                const targetContent = document.getElementById('tab-' + target);
+                if (targetContent) targetContent.classList.add('active');
+            });
+        });
+    }
+
     // --- Smooth Scroll for Anchor Links ---
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
