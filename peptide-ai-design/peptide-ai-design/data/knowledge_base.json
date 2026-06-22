@@ -1,0 +1,263 @@
+{
+  "peptide_synthesis_methods": {
+    "solid_phase_peptide_synthesis": {
+      "name_cn": "固相多肽合成 (SPPS)",
+      "name_en": "Solid Phase Peptide Synthesis",
+      "principle": "从C端向N端逐步偶联氨基酸，每步包含脱保护、洗涤、偶联、洗涤循环",
+      "strategies": ["Fmoc策略", "Boc策略"],
+      "fmoc_advantages": ["反应条件温和", "副产物少", "适用于大多数氨基酸", "易于自动化"],
+      "boc_advantages": ["酸稳定性好", "适用于含酸敏感修饰的多肽"],
+      "typical_yield": "70-95% (每步偶联)",
+      "max_length": "通常50-60个氨基酸，长肽建议片段缩合",
+      "resins": [
+        {"name": "Wang Resin", "linker": "Wang", "cleavage": "TFA", "C_terminal": "游离酸"},
+        {"name": "Rink Amide Resin", "linker": "Rink Amide", "cleavage": "TFA", "C_terminal": "酰胺"},
+        {"name": "2-CTC Resin", "linker": "2-Chlorotrityl", "cleavage": "弱酸", "C_terminal": "游离酸，适合敏感序列"},
+        {"name": "PAM Resin", "linker": "PAM", "cleavage": "HF", "C_terminal": "游离酸"}
+      ],
+      "coupling_reagents": [
+        {"name": "HBTU/HOBt/DIEA", "efficiency": "高", "racemization": "低", "cost": "中"},
+        {"name": "HATU/HOAt/DIEA", "efficiency": "极高", "racemization": "极低", "cost": "高"},
+        {"name": "PyBOP/HOBt/DIEA", "efficiency": "高", "racemization": "低", "cost": "中"},
+        {"name": "DIC/HOBt", "efficiency": "中高", "racemization": "低", "cost": "低"},
+        {"name": "Oxyma Pure/DIC", "efficiency": "高", "racemization": "低", "cost": "中", "note": "低毒性替代HOBt"}
+      ],
+      "solvents": ["DMF", "NMP", "DCM"],
+      "deprotection": {
+        "fmoc": "20% piperidine/DMF, 2 x 5-10 min",
+        "boc": "50% TFA/DCM, 15-30 min"
+      },
+      "cleavage": {
+        "standard": "TFA/TIS/H2O (95:2.5:2.5), 2-4h, RT",
+        "difficult": "TFA/TIS/EDT/H2O (92.5:2.5:2.5:2.5)",
+        "note": "含Cys/Met/Trp需加清除剂防止氧化"
+      }
+    },
+    "liquid_phase_peptide_synthesis": {
+      "name_cn": "液相多肽合成 (LPPS)",
+      "name_en": "Liquid Phase Peptide Synthesis",
+      "principle": "溶液中逐步偶联，每步需纯化",
+      "advantages": ["可大规模生产", "成本低", "无树脂限制"],
+      "disadvantages": ["纯化繁琐", "不适合长肽", "自动化程度低"],
+      "max_length": "通常<15个氨基酸",
+      "applications": ["短肽药物", "工业级多肽", "片段合成"]
+    },
+    "recombinant_peptide_synthesis": {
+      "name_cn": "重组表达合成",
+      "name_en": "Recombinant Peptide Synthesis",
+      "principle": "利用大肠杆菌/酵母/哺乳动物细胞表达",
+      "advantages": ["适合长肽和蛋白", "可引入非天然氨基酸", "成本低(大规模)"],
+      "disadvantages": ["不能引入化学修饰", "表达量可能低", "折叠问题"],
+      "max_length": ">100个氨基酸",
+      "applications": ["长肽药物", "需要正确折叠的多肽", "工业酶"]
+    }
+  },
+  "peptide_modifications": {
+    "n_terminal_modifications": [
+      {"mod": "Acetylation (Ac-)", "name_cn": "乙酰化", "purpose": "模拟天然N端，提高稳定性", "mass_shift": 42.01},
+      {"mod": "Biotinylation", "name_cn": "生物素化", "purpose": "亲和纯化/检测", "mass_shift": 226.08},
+      {"mod": "FITC/5-FAM", "name_cn": "荧光素标记", "purpose": "荧光检测/成像", "mass_shift": 389.38},
+      {"mod": "Cy3/Cy5", "name_cn": "花菁染料标记", "purpose": "FRET/荧光成像", "mass_shift": "~500-700"},
+      {"mod": "Myristoylation", "name_cn": "肉豆蔻酰化", "purpose": "膜靶向", "mass_shift": 210.20},
+      {"mod": "Palmitoylation", "name_cn": "棕榈酰化", "purpose": "膜锚定", "mass_shift": 238.41},
+      {"mod": "PEGylation", "name_cn": "聚乙二醇化", "purpose": "提高半衰期，降低免疫原性", "mass_shift": "可变"},
+      {"mod": "Fatty acid conjugation", "name_cn": "脂肪酸偶联", "purpose": "延长半衰期", "mass_shift": "可变"}
+    ],
+    "c_terminal_modifications": [
+      {"mod": "Amidation (-NH2)", "name_cn": "酰胺化", "purpose": "模拟天然C端，提高稳定性", "mass_shift": -0.98},
+      {"mod": "AFC (7-Amino-4-trifluoromethylcoumarin)", "name_cn": "AFC荧光标记", "purpose": "蛋白酶底物", "mass_shift": 237.18},
+      {"mod": "pNA (p-Nitroanilide)", "name_cn": "对硝基苯胺", "purpose": "蛋白酶底物", "mass_shift": 134.13},
+      {"mod": "CMK/CHO", "name_cn": "氯甲基酮/醛", "purpose": "不可逆抑制剂", "mass_shift": "可变"}
+    ],
+    "side_chain_modifications": [
+      {"mod": "Phosphorylation (pSer/pThr/pTyr)", "name_cn": "磷酸化", "purpose": "信号通路研究", "mass_shift": 79.98, "residues": ["Ser", "Thr", "Tyr"]},
+      {"mod": "Acetylation (Lys)", "name_cn": "乙酰化", "purpose": "表观遗传研究", "mass_shift": 42.01, "residues": ["Lys"]},
+      {"mod": "Methylation (Lys/Arg)", "name_cn": "甲基化", "purpose": "表观遗传/蛋白互作", "mass_shift": 14.02, "residues": ["Lys", "Arg"]},
+      {"mod": "Ubiquitination", "name_cn": "泛素化", "purpose": "蛋白降解信号", "mass_shift": 114.04, "residues": ["Lys"]},
+      {"mod": "SUMOylation", "name_cn": "SUMO化", "purpose": "核质运输/转录调控", "mass_shift": "~100", "residues": ["Lys"]},
+      {"mod": "Glycosylation", "name_cn": "糖基化", "purpose": "蛋白折叠/细胞识别", "mass_shift": "可变", "residues": ["Asn", "Ser", "Thr"]},
+      {"mod": "Disulfide bond", "name_cn": "二硫键", "purpose": "结构稳定/环肽", "mass_shift": -2.02, "residues": ["Cys"]},
+      {"mod": "Cyclization", "name_cn": "环化", "purpose": "提高稳定性/构象限制", "mass_shift": -18.02, "types": ["头尾环化", "侧链-侧链", "二硫键环化"]},
+      {"mod": "D-amino acid substitution", "name_cn": "D型氨基酸替换", "purpose": "抗酶解/提高稳定性", "mass_shift": 0, "note": "手性翻转"},
+      {"mod": "N-methylation", "name_cn": "N-甲基化", "purpose": "提高膜通透性/抗酶解", "mass_shift": 14.02, "residues": ["所有氨基酸"]},
+      {"mod": "Stapling", "name_cn": "订书肽", "purpose": "稳定alpha-螺旋构象", "mass_shift": "可变", "note": "烯烃复分解反应"},
+      {"mod": "Click chemistry (Azide-Alkyne)", "name_cn": "点击化学环化", "purpose": "环肽/标记", "mass_shift": "可变"}
+    ],
+    "isotopic_labeling": [
+      {"mod": "13C/15N labeled", "name_cn": "稳定同位素标记", "purpose": "NMR/MS研究", "applications": ["结构生物学", "代谢示踪"]},
+      {"mod": "D-labeled", "name_cn": "氘代", "purpose": "NMR/动力学研究", "applications": ["氢氘交换", "构象动力学"]}
+    ],
+    "unnatural_amino_acids": [
+      {"aa": "Aib (alpha-aminoisobutyric acid)", "name_cn": "alpha-氨基异丁酸", "purpose": "诱导alpha-螺旋/310-螺旋", "applications": ["抗菌肽", "穿膜肽"]},
+      {"aa": "Nle (Norleucine)", "name_cn": "正亮氨酸", "purpose": "Met替代，抗氧化", "applications": ["氧化敏感肽"]},
+      {"aa": "Cha (Cyclohexylalanine)", "name_cn": "环己基丙氨酸", "purpose": "疏水相互作用增强", "applications": ["蛋白-蛋白相互作用"]},
+      {"aa": "pFF (p-Fluorophenylalanine)", "name_cn": "对氟苯丙氨酸", "purpose": "19F NMR标记", "applications": ["结构生物学"]},
+      {"aa": "Acp (6-Aminohexanoic acid)", "name_cn": "6-氨基己酸", "purpose": "柔性连接臂", "applications": ["环肽", "双功能分子"]},
+      {"aa": "beta-Ala", "name_cn": "beta-丙氨酸", "purpose": "增加柔性", "applications": ["连接臂", "环肽"]},
+      {"aa": "Dap/Dab", "name_cn": "二氨基丙酸/二氨基丁酸", "purpose": "额外氨基用于修饰", "applications": ["分支肽", "标记"]},
+      {"aa": "Orn", "name_cn": "鸟氨酸", "purpose": "Lys类似物", "applications": ["抗菌肽", "分支点"]}
+    ]
+  },
+  "peptide_design_principles": {
+    "stability_optimization": [
+      "N端乙酰化和C端酰胺化可显著提高抗外肽酶能力",
+      "D型氨基酸替换可提高抗蛋白酶水解能力",
+      "N-甲基化可降低氢键供体数量，提高膜通透性",
+      "环化(头尾/侧链/二硫键)可限制构象，提高稳定性和靶点亲和力",
+      "非天然氨基酸(Aib, Nle等)可提高代谢稳定性",
+      "PEGylation可显著提高体内半衰期",
+      "脂肪酸偶联(如棕榈酰化)可延长半衰期并促进白蛋白结合"
+    ],
+    "cell_permeability": [
+      "阳离子多肽(富含Arg/Lys)可通过静电作用与细胞膜结合",
+      "穿膜肽(CPP)如TAT、Penetratin、Pep-1等可携带货物入胞",
+      "两亲性alpha-螺旋(如CPPs)可介导膜穿透",
+      "N-甲基化可减少氢键供体，提高被动扩散能力",
+      "环肽(如cyclosporin A)可通过被动扩散跨膜",
+      "分子量<500 Da和氢键供体<5个有利于口服吸收(Lipinski规则)"
+    ],
+    "target_binding": [
+      "alpha-螺旋模拟物(订书肽)可稳定二级结构，增强蛋白-蛋白相互作用",
+      "beta-发夹模拟物可模拟天然蛋白的beta-折叠界面",
+      "构象限制(环化/交联)可降低熵罚，提高结合亲和力",
+      "药效团映射可优化关键残基位置",
+      "丙氨酸扫描可识别关键结合残基",
+      "分子对接和MD模拟可优化结合模式"
+    ],
+    "immunogenicity": [
+      "避免已知T细胞表位(可通过IEDB数据库预测)",
+      "PEGylation可降低免疫识别",
+      "人源化序列设计可降低免疫原性",
+      "避免重复序列和极端理化性质"
+    ],
+    "solubility": [
+      "避免长疏水序列(>5个连续疏水氨基酸)",
+      "在序列中适当引入亲水残基(Ser, Lys, Arg)",
+      "C端或N端添加亲水标签(如EEE, KKK)",
+      "注意等电点(pI)，避免接近生理pH",
+      "避免易聚集序列(如GNNQQNY)",
+      "考虑添加增溶剂(如Mini-PEG, Acp)"
+    ]
+  },
+  "quality_control": {
+    "analytical_methods": [
+      {"method": "HPLC", "purpose": "纯度分析", "standard": ">95% (研究级), >98% (药典级)"},
+      {"method": "LC-MS/ESI-MS", "purpose": "分子量确认", "standard": "理论分子量+-1 Da"},
+      {"method": "MALDI-TOF", "purpose": "分子量确认(大分子)", "standard": "理论分子量+-0.1%"},
+      {"method": "Amino Acid Analysis (AAA)", "purpose": "氨基酸组成确认", "standard": "各氨基酸比例偏差<10%"},
+      {"method": "Edman Degradation", "purpose": "N端序列分析", "standard": "前10-20个残基确认"},
+      {"method": "Peptide Mapping", "purpose": "序列完整性确认", "standard": "酶切后LC-MS/MS分析"},
+      {"method": "Circular Dichroism (CD)", "purpose": "二级结构分析", "applications": ["alpha-螺旋", "beta-折叠", "无规卷曲"]},
+      {"method": "NMR", "purpose": "三维结构解析", "applications": ["溶液构象", "动态过程"]},
+      {"method": "SPR/BLI", "purpose": "亲和力测定", "applications": ["KD测定", "动力学分析"]},
+      {"method": "ITC", "purpose": "热力学参数", "applications": ["dH, dS, dG测定"]}
+    ],
+    "impurity_profile": [
+      "缺失肽(Deletion peptides)",
+      "截断肽(Truncated peptides)",
+      "插入肽(Insertion peptides)",
+      "消旋肽(Racemized peptides)",
+      "副产物(Side reaction products: pyroglutamate, aspartimide等)",
+      "TFA残留(TFA salts)",
+      "残留溶剂(DMF, NMP, ACN)",
+      "重金属残留(Pd, Cu from coupling reagents)"
+    ]
+  },
+  "application_areas": {
+    "therapeutic_peptides": {
+      "name_cn": "治疗性多肽",
+      "examples": ["胰岛素", "GLP-1受体激动剂", "抗菌肽", "抗癌肽", "免疫调节肽"],
+      "design_considerations": ["半衰期", "免疫原性", "口服生物利用度", "靶点选择性"]
+    },
+    "diagnostic_peptides": {
+      "name_cn": "诊断用多肽",
+      "examples": ["抗原肽", "捕获肽", "报告肽", "成像探针"],
+      "design_considerations": ["特异性", "灵敏度", "稳定性", "标记效率"]
+    },
+    "research_tools": {
+      "name_cn": "研究工具多肽",
+      "examples": ["底物肽", "抑制剂", "激活剂", "对照肽", "穿膜肽"],
+      "design_considerations": ["活性", "选择性", "细胞通透性", "标记兼容性"]
+    },
+    "cosmetic_peptides": {
+      "name_cn": "化妆品多肽",
+      "examples": ["信号肽", "神经递质抑制肽", "载体肽", "酶抑制肽"],
+      "design_considerations": ["皮肤渗透", "稳定性", "安全性", "成本"]
+    },
+    "vaccine_peptides": {
+      "name_cn": "疫苗多肽",
+      "examples": ["B细胞表位肽", "T细胞表位肽", "多表位嵌合肽"],
+      "design_considerations": ["免疫原性", "MHC亲和力", "表位覆盖率", "佐剂兼容性"]
+    }
+  },
+  "calculator_data": {
+    "amino_acid_properties": {
+      "A": {"name": "Ala", "name_cn": "丙氨酸", "mw": 89.09, "pi": 6.00, "hydrophobicity": 1.8, "charge_at_ph7": 0},
+      "R": {"name": "Arg", "name_cn": "精氨酸", "mw": 174.20, "pi": 10.76, "hydrophobicity": -4.5, "charge_at_ph7": 1},
+      "N": {"name": "Asn", "name_cn": "天冬酰胺", "mw": 132.12, "pi": 5.41, "hydrophobicity": -3.5, "charge_at_ph7": 0},
+      "D": {"name": "Asp", "name_cn": "天冬氨酸", "mw": 133.10, "pi": 2.77, "hydrophobicity": -3.5, "charge_at_ph7": -1},
+      "C": {"name": "Cys", "name_cn": "半胱氨酸", "mw": 121.16, "pi": 5.07, "hydrophobicity": 2.5, "charge_at_ph7": 0},
+      "Q": {"name": "Gln", "name_cn": "谷氨酰胺", "mw": 146.15, "pi": 5.65, "hydrophobicity": -3.5, "charge_at_ph7": 0},
+      "E": {"name": "Glu", "name_cn": "谷氨酸", "mw": 147.13, "pi": 3.22, "hydrophobicity": -3.5, "charge_at_ph7": -1},
+      "G": {"name": "Gly", "name_cn": "甘氨酸", "mw": 75.07, "pi": 5.97, "hydrophobicity": -0.4, "charge_at_ph7": 0},
+      "H": {"name": "His", "name_cn": "组氨酸", "mw": 155.16, "pi": 7.59, "hydrophobicity": -3.2, "charge_at_ph7": 0.1},
+      "I": {"name": "Ile", "name_cn": "异亮氨酸", "mw": 131.17, "pi": 6.02, "hydrophobicity": 4.5, "charge_at_ph7": 0},
+      "L": {"name": "Leu", "name_cn": "亮氨酸", "mw": 131.17, "pi": 5.98, "hydrophobicity": 3.8, "charge_at_ph7": 0},
+      "K": {"name": "Lys", "name_cn": "赖氨酸", "mw": 146.19, "pi": 9.74, "hydrophobicity": -3.9, "charge_at_ph7": 1},
+      "M": {"name": "Met", "name_cn": "甲硫氨酸", "mw": 149.21, "pi": 5.74, "hydrophobicity": 1.9, "charge_at_ph7": 0},
+      "F": {"name": "Phe", "name_cn": "苯丙氨酸", "mw": 165.19, "pi": 5.48, "hydrophobicity": 2.8, "charge_at_ph7": 0},
+      "P": {"name": "Pro", "name_cn": "脯氨酸", "mw": 115.13, "pi": 6.30, "hydrophobicity": -1.6, "charge_at_ph7": 0},
+      "S": {"name": "Ser", "name_cn": "丝氨酸", "mw": 105.09, "pi": 5.68, "hydrophobicity": -0.8, "charge_at_ph7": 0},
+      "T": {"name": "Thr", "name_cn": "苏氨酸", "mw": 119.12, "pi": 5.60, "hydrophobicity": -0.7, "charge_at_ph7": 0},
+      "W": {"name": "Trp", "name_cn": "色氨酸", "mw": 204.23, "pi": 5.89, "hydrophobicity": -0.9, "charge_at_ph7": 0},
+      "Y": {"name": "Tyr", "name_cn": "酪氨酸", "mw": 181.19, "pi": 5.66, "hydrophobicity": -1.3, "charge_at_ph7": 0},
+      "V": {"name": "Val", "name_cn": "缬氨酸", "mw": 117.15, "pi": 5.96, "hydrophobicity": 4.2, "charge_at_ph7": 0}
+    },
+    "modification_masses": {
+      "Acetylation_Nterm": 42.0106,
+      "Acetylation_Lys": 42.0106,
+      "Amidation_Cterm": -0.9840,
+      "Biotinylation": 226.0776,
+      "FITC": 389.382,
+      "Phosphorylation": 79.9663,
+      "Methylation": 14.0157,
+      "Dimethylation": 28.0313,
+      "Trimethylation": 42.0470,
+      "Ubiquitination": 114.0429,
+      "Disulfide_formation": -2.0157,
+      "Cy3": 512.30,
+      "Cy5": 650.30,
+      "PEG4": 220.08,
+      "PEG8": 396.18,
+      "PEG12": 572.28,
+      "Myristoylation": 210.1984,
+      "Palmitoylation": 238.2297,
+      "Stearoylation": 266.2610,
+      "Cholesterol": 368.64,
+      "DOTA": 404.28,
+      "NOTA": 244.10,
+      "DTPA": 393.25,
+      "Maleimide": 111.03,
+      "Azide": 42.02,
+      "Alkyne": 24.00,
+      "DBCO": 200.08,
+      "TAMRA": 430.25,
+      "EDANS": 252.27,
+      "Dabcyl": 253.30,
+      "pNA": 134.13,
+      "AFC": 237.18,
+      "CMK": 63.55,
+      "CHO": 29.02,
+      "N_Methylation": 14.0157,
+      "Formylation": 27.9949,
+      "Pyroglutamate": -17.0265,
+      "Sulfation": 79.9568,
+      "Nitration_Tyr": 44.9851,
+      "Hydroxylation": 15.9949,
+      "Carboxylation": 43.9898,
+      "Lipoylation": 188.0329,
+      "Farnesylation": 204.1878,
+      "Geranylgeranylation": 272.2504
+    }
+  }
+}

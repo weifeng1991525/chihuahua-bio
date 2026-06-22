@@ -767,6 +767,21 @@
                 </div>
             </div>
 
+            <!-- AI Custom Plan Generator -->
+            <div class="ai-plan-section">
+                <div class="ai-plan-badge">🤖 AI智能方案</div>
+                <h3>AI多肽定制方案生成器</h3>
+                <p>输入您的多肽需求，AI将在30秒内为您生成包含序列设计、合成方案、质控标准与报价的完整技术方案，支持直接下载。</p>
+                <button class="ai-plan-btn" id="aiPlanBtn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                        <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                        <path d="M2 17l10 5 10-5"/>
+                        <path d="M2 12l10 5 10-5"/>
+                    </svg>
+                    <span>立即生成定制方案</span>
+                </button>
+            </div>
+
             <div class="cs-cta">
                 <p>如需定制多肽，请致电 <strong>13317714667</strong>（微信同号）或发送邮件至 <strong>genewawa@foxmail.com</strong>，我们的技术团队将在24小时内为您提供专业方案与报价。</p>
             </div>
@@ -1317,6 +1332,88 @@
             <div class="float-qr">
                 <img src="personal-qr.jpg" alt="扫码添加微信" class="float-qr-img">
                 <span>扫码添加微信</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- AI Plan Modal -->
+    <div class="ai-modal-overlay" id="aiModalOverlay">
+        <div class="ai-modal">
+            <div class="ai-modal-header">
+                <h3>🧬 AI多肽定制方案生成器</h3>
+                <button class="ai-modal-close" id="aiModalClose">&times;</button>
+            </div>
+            <div class="ai-modal-body">
+                <!-- Step 1: Input Form -->
+                <div class="ai-step" id="aiStepInput">
+                    <div class="ai-form">
+                        <div class="form-group">
+                            <label>需求描述 <span class="required">*</span></label>
+                            <textarea id="aiDesc" placeholder="请详细描述您的多肽需求，例如：&#10;- 多肽序列（如有）：Gly-Ala-Leu-Ser-Lys-Tyr-Val-Phe&#10;- 需求量：10mg&#10;- 纯度要求：95%以上&#10;- 修饰需求：N端FITC标记，C端酰胺化&#10;- 用途：细胞成像实验&#10;- 特殊要求：无" rows="5"></textarea>
+                        </div>
+                        <div class="form-row-ai">
+                            <div class="form-group">
+                                <label>联系人姓名</label>
+                                <input type="text" id="aiName" placeholder="您的姓名">
+                            </div>
+                            <div class="form-group">
+                                <label>联系电话</label>
+                                <input type="text" id="aiPhone" placeholder="133xxxxxxxx">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>电子邮箱</label>
+                            <input type="email" id="aiEmail" placeholder="example@email.com">
+                        </div>
+                        <div class="ai-form-tips">
+                            <p>💡 提示：描述越详细，AI生成的方案越精准。建议包含序列、长度、修饰、纯度、数量、用途等信息。</p>
+                        </div>
+                        <button class="ai-generate-btn" id="aiGenerateBtn">
+                            <span class="btn-text">生成方案</span>
+                            <span class="btn-loading" style="display:none;">
+                                <svg class="spin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83"/></svg>
+                                AI正在分析并生成方案...
+                            </span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 2: Loading -->
+                <div class="ai-step" id="aiStepLoading" style="display:none;">
+                    <div class="ai-loading-center">
+                        <div class="ai-loading-spinner"></div>
+                        <h4>AI正在生成专业多肽设计方案</h4>
+                        <p id="aiLoadingText">正在分析需求...</p>
+                        <div class="ai-progress-bar">
+                            <div class="ai-progress-fill" id="aiProgressFill"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 3: Result Preview -->
+                <div class="ai-step" id="aiStepResult" style="display:none;">
+                    <div class="ai-result-header">
+                        <h4>📋 方案预览</h4>
+                        <div class="ai-result-actions">
+                            <button class="ai-action-btn secondary" id="aiRegenerateBtn">重新生成</button>
+                            <button class="ai-action-btn primary" id="aiDownloadBtn">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                                下载方案
+                            </button>
+                        </div>
+                    </div>
+                    <div class="ai-result-content" id="aiResultContent"></div>
+                </div>
+
+                <!-- Step 4: Error -->
+                <div class="ai-step" id="aiStepError" style="display:none;">
+                    <div class="ai-error-center">
+                        <div class="ai-error-icon">⚠️</div>
+                        <h4>生成失败</h4>
+                        <p id="aiErrorText">请检查网络连接后重试</p>
+                        <button class="ai-action-btn primary" id="aiRetryBtn">重试</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
