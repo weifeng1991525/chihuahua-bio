@@ -621,7 +621,7 @@ ${desc}
         .cover h1 { color: white; border: none; margin: 0 0 6px; font-size: 28px; font-weight: 700; letter-spacing: 2px; }
         .cover .subtitle { color: rgba(255,255,255,0.65); font-size: 14px; margin: 0 0 30px; letter-spacing: 1px; }
         .cover .info-table { width: 100%; max-width: 420px; margin: 0 auto; border-collapse: collapse; }
-        .cover .info-table td { padding: 8px 12px; font-size: 14px; border: none; }
+        .cover .info-table td { padding: 8px 12px; font-size: 14px; border: none; background: transparent; }
         .cover .info-table td:first-child { text-align: right; color: rgba(255,255,255,0.6); font-weight: 500; width: 100px; }
         .cover .info-table td:last-child { text-align: left; color: #fff; font-weight: 600; }
         .cover .divider { width: 60px; height: 3px; background: #00C9A7; margin: 24px auto; border-radius: 2px; }
