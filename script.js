@@ -283,7 +283,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const AGENS_API_KEY = 'sk-wvjRUdJZUq37FzP1lZMLKgrL3tqtuaP7xqeNaEbc1pYjIonG';
 
     // Web3Forms Configuration
-    const WEB3FORMS_ACCESS_KEY = 'YOUR_WEB3FORMS_ACCESS_KEY'; // 替换为你的Access Key
+    const WEB3FORMS_ACCESS_KEY = '5716acf4-7422-4d78-942d-4eeb57ccf12d';
     const WEB3FORMS_EMAIL = 'weifeng@anernor.com';
 
     // Knowledge base context for better AI responses
