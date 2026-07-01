@@ -275,6 +275,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentPlanText = '';
     let currentPlanHtml = '';
     let currentCustomerInfo = {};
+    let currentProjectNo = '';
+    let currentProjectDate = '';
 
     // AGENS API Configuration
     const AGENS_API_URL = 'https://apihub.agnes-ai.com/v1/chat/completions';
@@ -355,23 +357,65 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function markdownToHtml(md) {
         let html = escapeHtml(md);
+        // Remove standalone * characters that are not part of ** or *...* pairs
+        html = html.replace(/(?<!\*)\*(?!\*)(?![^(]*\))/g, '');
+        // Headings (support both # and Chinese numbered titles like "一、")
         html = html.replace(/^#### (.*$)/gim, '<h4>$1</h4>');
         html = html.replace(/^### (.*$)/gim, '<h3>$1</h3>');
         html = html.replace(/^## (.*$)/gim, '<h2>$1</h2>');
         html = html.replace(/^# (.*$)/gim, '<h1>$1</h1>');
+        // Bold
         html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-        html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
+        // Inline code
         html = html.replace(/`([^`]+)`/g, '<code style="background:#f1f5f9;padding:2px 6px;border-radius:4px;font-size:12px;">$1</code>');
+        // Unordered list items
         html = html.replace(/^\- (.*$)/gim, '<li>$1</li>');
-        html = html.replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>');
+        // Wrap consecutive <li> in <ul>
+        html = html.replace(/(<li>[\s\S]*?<\/li>)(?:\s*(?!<li>))/g, function(match, liBlock) {
+            // Only wrap if not already wrapped
+            if (liBlock.indexOf('<ul>') === -1) {
+                return '<ul>' + liBlock + '</ul>';
+            }
+            return liBlock;
+        });
+        // Ordered list items
         html = html.replace(/^\d+\. (.*$)/gim, '<li>$1</li>');
+        // Newlines to <br>, then collapse multiple <br> into max one
         html = html.replace(/\n/g, '<br>');
-        html = html.replace(/(<br>){3,}/g, '<br><br>');
+        html = html.replace(/(<br>\s*){3,}/g, '<br>');
+        // Remove <br> right before/after block elements
+        html = html.replace(/<br>\s*(<h[1-4]|<ul|<ol|<li|<\/ul|<\/ol|<table|<tr|<th|<td)/g, '$1');
+        html = html.replace(/(<\/h[1-4]>|<\/ul>|<\/ol>|<\/table>|<\/tr>|<\/th>|<\/td>)\s*<br>/g, '$1');
         return html;
     }
 
+    function getProjectMeta() {
+        const now = new Date();
+        const y = now.getFullYear();
+        const m = String(now.getMonth() + 1).padStart(2, '0');
+        const d = String(now.getDate()).padStart(2, '0');
+        const hh = String(now.getHours()).padStart(2, '0');
+        const mm = String(now.getMinutes()).padStart(2, '0');
+        const seq = String(Math.floor(Math.random() * 9000) + 1000);
+        return {
+            dateCN: `${y}年${now.getMonth() + 1}月${now.getDate()}日`,
+            dateShort: `${y}${m}${d}`,
+            timeShort: `${hh}${mm}`,
+            projectId: `PAD-${y}${m}${d}-${seq}`,
+            seq
+        };
+    }
+
     function buildPrompt(desc, name, phone, email) {
+        const meta = getProjectMeta();
+        currentProjectNo = meta.projectId;
+        currentProjectDate = meta.dateCN;
+
         return `请作为吉娃娃生物(Genewawa)的多肽技术专家，为客户生成一份专业的多肽定制设计方案报告。
+
+【项目信息】
+- 项目编号: ${meta.projectId}
+- 编制日期: ${meta.dateCN}
 
 【客户信息】
 - 姓名: ${name || '未提供'}
@@ -381,49 +425,38 @@ document.addEventListener('DOMContentLoaded', () => {
 【客户需求】
 ${desc}
 
-请生成一份结构完整、专业详细的多肽定制设计方案，包含以下章节：
+请严格按照以下格式输出方案，排版要求：官方正式风格，紧凑排版，段落间不留多余空行，不使用星号(*)、加粗(**)或斜杠标记，用中文序号和结构化的纯文本表达。
 
-# 一、项目概述
-简要说明项目背景和目标。
+方案结构如下：
 
-# 二、需求分析
-详细分析客户需求的各个维度（序列、长度、修饰、纯度、数量、用途等）。
+一、项目概述
+（简要说明项目背景和目标，2-3句即可）
 
-# 三、多肽设计方案
-- 推荐序列（如客户未提供）
-- 理化参数分析：分子量(MW)、等电点(pI)、净电荷(@pH7.0)、疏水性
-- 稳定性评估
-- 溶解性建议
+二、需求分析
+（从序列、长度、修饰、纯度、数量、用途等维度分析，用简洁条目列出）
 
-# 四、合成方案
-- 合成策略（Fmoc-SPPS）
-- 树脂选择建议
-- 偶联试剂推荐
-- 关键步骤注意事项
-- 预期合成难度等级(A/B/C/D)
+三、多肽设计方案
+（推荐序列、理化参数含分子量/等电点/净电荷/疏水性、稳定性评估、溶解性建议，用表格或紧凑条目呈现）
 
-# 五、修饰方案（如适用）
-详细说明每种修饰的引入方法和注意事项。
+四、合成方案
+（合成策略Fmoc-SPPS、树脂选择、偶联试剂、关键步骤、难度等级A/B/C/D）
 
-# 六、质量控制方案
-- HPLC纯度检测
-- MS分子量确认
-- 其他必要检测
+五、修饰方案（如适用）
+（每种修饰的引入方法和注意事项，条目化呈现）
 
-# 七、项目周期与报价估算
-- 合成周期（工作日）
-- 各阶段时间节点
-- 预估报价范围（元）
+六、质量控制方案
+（HPLC纯度、MS分子量、其他检测，条目化呈现）
 
-# 八、风险评估与建议
-- 潜在技术风险
-- 应对策略
-- 优化建议
+七、项目周期与报价估算
+（合成周期工作日、阶段时间节点、预估报价范围元）
 
-# 九、交付内容
-列出最终交付给客户的产品和文档清单。
+八、风险评估与建议
+（潜在技术风险、应对策略、优化建议，条目化呈现）
 
-请使用专业但易懂的语言，确保方案具有实际可操作性。所有参数和评估必须基于科学原理和行业经验。`;
+九、交付内容
+（交付产品和文档清单，条目化呈现）
+
+请确保方案具有实际可操作性，所有参数和评估基于科学原理和行业经验。排版要求再强调：紧凑官方风格，不使用Markdown星号语法(**或*)，不留多余空行，段落间只保留一个换行。`;
     }
 
     async function callAgensAPI(prompt) {
@@ -549,6 +582,9 @@ ${desc}
     function downloadPlan() {
         if (!currentPlanText) return;
 
+        const meta = getProjectMeta();
+        const projNo = currentProjectNo || meta.projectId;
+        const projDate = currentProjectDate || meta.dateCN;
         const timestamp = new Date().toISOString().slice(0, 10).replace(/-/g, '');
         const filename = `吉娃娃生物_多肽定制方案_${timestamp}.html`;
 
@@ -558,32 +594,45 @@ ${desc}
     <meta charset="UTF-8">
     <title>多肽定制设计方案 - 吉娃娃生物</title>
     <style>
-        body { font-family: 'Noto Sans SC', 'Microsoft YaHei', sans-serif; max-width: 900px; margin: 40px auto; padding: 0 20px; line-height: 1.8; color: #334155; }
-        h1 { font-size: 24px; color: #0F172A; border-bottom: 3px solid #00C9A7; padding-bottom: 10px; margin-top: 32px; }
-        h2 { font-size: 20px; color: #0F172A; margin-top: 28px; border-left: 4px solid #0891B2; padding-left: 12px; }
-        h3 { font-size: 17px; color: #1E293B; margin-top: 20px; }
-        h4 { font-size: 15px; color: #334155; margin-top: 16px; }
-        p { margin-bottom: 12px; }
-        ul, ol { margin-bottom: 12px; padding-left: 24px; }
-        li { margin-bottom: 6px; }
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&display=swap');
+        body { font-family: 'Noto Sans SC', 'Microsoft YaHei', sans-serif; max-width: 900px; margin: 0 auto; padding: 0 20px; line-height: 1.8; color: #334155; background: #fff; }
+        .cover { text-align: center; padding: 60px 40px 50px; background: linear-gradient(135deg, #0F172A, #1E293B); color: white; border-radius: 12px; margin-bottom: 36px; }
+        .cover h1 { color: white; border: none; margin: 0 0 6px; font-size: 28px; font-weight: 700; letter-spacing: 2px; }
+        .cover .subtitle { color: rgba(255,255,255,0.65); font-size: 14px; margin: 0 0 30px; letter-spacing: 1px; }
+        .cover .info-table { width: 100%; max-width: 420px; margin: 0 auto; border-collapse: collapse; }
+        .cover .info-table td { padding: 8px 12px; font-size: 14px; border: none; }
+        .cover .info-table td:first-child { text-align: right; color: rgba(255,255,255,0.6); font-weight: 500; width: 100px; }
+        .cover .info-table td:last-child { text-align: left; color: #fff; font-weight: 600; }
+        .cover .divider { width: 60px; height: 3px; background: #00C9A7; margin: 24px auto; border-radius: 2px; }
+        h1 { font-size: 22px; color: #0F172A; border-bottom: 2px solid #00C9A7; padding-bottom: 8px; margin-top: 32px; font-weight: 700; }
+        h2 { font-size: 19px; color: #0F172A; margin-top: 28px; border-left: 4px solid #0891B2; padding-left: 12px; font-weight: 600; }
+        h3 { font-size: 16px; color: #1E293B; margin-top: 20px; font-weight: 600; }
+        h4 { font-size: 15px; color: #334155; margin-top: 16px; font-weight: 600; }
+        p { margin: 6px 0; }
+        ul, ol { margin: 6px 0 12px; padding-left: 24px; }
+        li { margin-bottom: 4px; }
         strong { color: #0F172A; }
         code { background: #f1f5f9; padding: 2px 8px; border-radius: 4px; font-size: 13px; }
-        table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 14px; }
-        th, td { padding: 10px 12px; border: 1px solid #e2e8f0; text-align: left; }
+        table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 14px; }
+        th, td { padding: 8px 12px; border: 1px solid #e2e8f0; text-align: left; }
         th { background: linear-gradient(135deg, #00C9A7, #0891B2); color: white; font-weight: 600; }
         tr:nth-child(even) { background: #f8fafc; }
-        .header { text-align: center; padding: 30px; background: linear-gradient(135deg, #0F172A, #1E293B); color: white; border-radius: 12px; margin-bottom: 30px; }
-        .header h1 { color: white; border: none; margin: 0; font-size: 28px; }
-        .header p { color: rgba(255,255,255,0.7); margin: 8px 0 0; }
+        .content { padding: 0 10px; }
         .footer { text-align: center; margin-top: 40px; padding: 20px; border-top: 1px solid #e2e8f0; font-size: 13px; color: #64748B; }
         .footer strong { color: #00C9A7; }
         @media print { body { margin: 0; } .no-print { display: none; } }
     </style>
 </head>
 <body>
-    <div class="header">
+    <div class="cover">
         <h1>多肽定制设计方案</h1>
-        <p>广西吉娃娃生物科技有限公司 (Genewawa) | 专业多肽技术服务</p>
+        <div class="divider"></div>
+        <p class="subtitle">广西吉娃娃生物科技有限公司 (Genewawa)</p>
+        <table class="info-table">
+            <tr><td>项目编号</td><td>${projNo}</td></tr>
+            <tr><td>编制日期</td><td>${projDate}</td></tr>
+            <tr><td>方案版本</td><td>V1.0</td></tr>
+        </table>
     </div>
     <div class="content">
         ${currentPlanHtml}
