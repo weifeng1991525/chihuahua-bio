@@ -282,10 +282,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const AGENS_API_URL = 'https://apihub.agnes-ai.com/v1/chat/completions';
     const AGENS_API_KEY = 'sk-wvjRUdJZUq37FzP1lZMLKgrL3tqtuaP7xqeNaEbc1pYjIonG';
 
-    // EmailJS Configuration (for sending emails from frontend)
-    const EMAILJS_SERVICE_ID = 'service_genewawa';
-    const EMAILJS_TEMPLATE_ID = 'template_inquiry';
-    const EMAILJS_PUBLIC_KEY = 'YOUR_PUBLIC_KEY'; // Will use mailto fallback
+    // Web3Forms Configuration
+    const WEB3FORMS_ACCESS_KEY = 'YOUR_WEB3FORMS_ACCESS_KEY'; // 替换为你的Access Key
+    const WEB3FORMS_EMAIL = 'weifeng@anernor.com';
 
     // Knowledge base context for better AI responses
     const KB_CONTEXT = `你是一位资深多肽合成与设计专家，精通Fmoc固相多肽合成(SPPS)、多肽修饰、质量控制等领域。请基于以下专业知识生成方案：
@@ -486,41 +485,63 @@ ${desc}
         return data.choices[0].message.content;
     }
 
-    // Send customer inquiry via mailto + form-submit fallback
-    function sendCustomerInfo(name, phone, email, desc, planText) {
-        const subject = encodeURIComponent(`[吉娃娃生物] 多肽定制方案咨询 - ${name || '新客户'}`);
+    // Send customer info via Web3Forms (auto email to owner) + mailto fallback
+    async function sendCustomerInfo(name, phone, email, desc, planText) {
+        const subject = `[吉娃娃生物] 多肽定制方案咨询 - ${name || '新客户'}`;
+        const planSummary = planText ? planText.substring(0, 2000) : '（方案生成中）';
+        const timestamp = new Date().toLocaleString('zh-CN');
+
+        // Method 1: Web3Forms AJAX (auto send, no user action needed)
+        if (WEB3FORMS_ACCESS_KEY && WEB3FORMS_ACCESS_KEY !== 'YOUR_WEB3FORMS_ACCESS_KEY') {
+            try {
+                const formData = {
+                    access_key: WEB3FORMS_ACCESS_KEY,
+                    subject: subject,
+                    from_name: '吉娃娃生物官网',
+                    to: WEB3FORMS_EMAIL,
+                    '客户姓名': name || '未提供',
+                    '联系电话': phone || '未提供',
+                    '客户邮箱': email || '未提供',
+                    '需求描述': desc,
+                    '提交时间': timestamp,
+                    'AI方案摘要': planSummary,
+                    botcheck: ''
+                };
+
+                const resp = await fetch('https://api.web3forms.com/submit', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                    body: JSON.stringify(formData)
+                });
+
+                const result = await resp.json();
+                if (result.success) {
+                    console.log('[Web3Forms] 邮件发送成功');
+                } else {
+                    console.warn('[Web3Forms] 发送失败:', result.message);
+                    fallbackMailto(subject, name, phone, email, desc, planSummary, timestamp);
+                }
+            } catch (e) {
+                console.warn('[Web3Forms] 网络异常:', e);
+                fallbackMailto(subject, name, phone, email, desc, planSummary, timestamp);
+            }
+        } else {
+            // No access key yet, use mailto fallback
+            fallbackMailto(subject, name, phone, email, desc, planSummary, timestamp);
+        }
+    }
+
+    function fallbackMailto(subject, name, phone, email, desc, planSummary, timestamp) {
         const body = encodeURIComponent(
             `客户信息：\n` +
             `姓名：${name || '未提供'}\n` +
             `电话：${phone || '未提供'}\n` +
             `邮箱：${email || '未提供'}\n\n` +
             `需求描述：\n${desc}\n\n` +
-            `--- AI生成方案 ---\n${planText ? planText.substring(0, 2000) : '（方案生成中）'}\n\n` +
-            `--- 系统信息 ---\n提交时间：${new Date().toLocaleString('zh-CN')}\n来源：吉娃娃生物官网AI方案生成器`
+            `--- AI生成方案 ---\n${planSummary}\n\n` +
+            `--- 系统信息 ---\n提交时间：${timestamp}\n来源：吉娃娃生物官网AI方案生成器`
         );
-
-        // Open mailto link
-        window.open(`mailto:29152039@qq.com?subject=${subject}&body=${body}`, '_blank');
-    }
-
-    // Also try to submit to a form endpoint if available (Formspree as fallback)
-    async function submitToFormspree(name, phone, email, desc) {
-        try {
-            const formData = new FormData();
-            formData.append('name', name || '未提供');
-            formData.append('phone', phone || '未提供');
-            formData.append('email', email || '未提供');
-            formData.append('message', desc);
-            formData.append('_subject', `[吉娃娃生物] 多肽定制方案咨询 - ${name || '新客户'}`);
-
-            await fetch('https://formspree.io/f/YOUR_FORM_ID', {
-                method: 'POST',
-                body: formData,
-                headers: { 'Accept': 'application/json' }
-            });
-        } catch (e) {
-            // Silently fail - mailto is the primary method
-        }
+        window.open(`mailto:${WEB3FORMS_EMAIL}?subject=${encodeURIComponent(subject)}&body=${body}`, '_blank');
     }
 
     async function generatePlan() {
