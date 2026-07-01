@@ -256,6 +256,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const aiGenerateBtn = $('aiGenerateBtn');
     const aiRegenerateBtn = $('aiRegenerateBtn');
     const aiDownloadBtn = $('aiDownloadBtn');
+    const aiExcelBtn = $('aiExcelBtn');
     const aiRetryBtn = $('aiRetryBtn');
 
     const aiStepInput = $('aiStepInput');
@@ -471,8 +472,8 @@ ${desc}
                     { role: 'system', content: KB_CONTEXT },
                     { role: 'user', content: prompt }
                 ],
-                temperature: 0.7,
-                max_tokens: 4096
+                temperature: 0.6,
+                max_tokens: 2048
             })
         });
 
@@ -584,13 +585,12 @@ ${desc}
             currentPlanText = result;
             currentPlanHtml = markdownToHtml(result);
 
-            // Send email with customer info and plan
-            sendCustomerInfo(name, phone, email, desc, currentPlanText);
+            // Show result immediately without waiting for email
+            if (aiResultContent) aiResultContent.innerHTML = currentPlanHtml;
+            showStep('result');
 
-            setTimeout(() => {
-                if (aiResultContent) aiResultContent.innerHTML = currentPlanHtml;
-                showStep('result');
-            }, 500);
+            // Send email in background (non-blocking)
+            sendCustomerInfo(name, phone, email, desc, currentPlanText);
 
         } catch (error) {
             clearInterval(progressInterval);
@@ -598,6 +598,158 @@ ${desc}
             if (aiErrorText) aiErrorText.textContent = error.message || '网络连接失败，请检查网络后重试';
             showStep('error');
         }
+    }
+
+    // Generate and download order form Excel based on AI plan
+    function downloadExcel() {
+        if (!currentPlanText || typeof XLSX === 'undefined') return;
+
+        const info = currentCustomerInfo || {};
+        const meta = getProjectMeta();
+        const projNo = currentProjectNo || meta.projectId;
+        const projDate = currentProjectDate || meta.dateCN;
+        const now = new Date();
+        const dateStr = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')} ${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}:${String(now.getSeconds()).padStart(2,'0')}`;
+
+        const wb = XLSX.utils.book_new();
+
+        // --- Sheet1: Order Form ---
+        const titleRow = ['广西吉娃娃生物有限公司多肽合成订购单'];
+        const section1 = ['客户信息'];
+        const customerRows = [
+            ['*客户姓名：', info.name || ''],
+            ['*客户单位：', ''],
+            ['*客户电话：', info.phone || '', '*客户Email：', info.email || ''],
+            ['*发票抬头：', '', '*税号', ''],
+            ['*送货地址：', ''],
+            [' 订单日期：', dateStr, '', '订购邮箱', 'weifeng@anernor.com'],
+            ['备注：\n1.此表格中*代表必填项\n2.如果未收到邮件回复请电话咨询\n3.为了避免重复下订单，请不要重复发送', '', '', '客服电话', '13317714667']
+        ];
+
+        const section2 = ['订单信息'];
+        const headerRow = ['序号', '氨基酸个数', "多肽序列（N'toC'）", '质量（mg）', '纯度', "N'修饰", "C'修饰", '其他修饰（荧光标记、磷酸化修饰、环化、载体蛋白偶联等）', '', '', '', '', '价格'];
+
+        // Parse peptide info from AI plan text
+        const peptides = parsePeptidesFromPlan(currentPlanText);
+        const dataRows = peptides.map((p, i) => [
+            i + 1, p.length || '', p.sequence || '', p.amount || '', p.purity || '',
+            p.nMod || '', p.cMod || '', p.otherMod || '', '', '', '', '', p.price || ''
+        ]);
+
+        // Add empty rows for additional orders
+        for (let i = 0; i < 4; i++) {
+            dataRows.push([peptides.length + i + 1, '', '', '', '', '', '', '', '', '', '', '', '']);
+        }
+
+        // Combine all rows for Sheet1
+        const aoa = [
+            titleRow,
+            section1,
+            ...customerRows,
+            [], [], [],
+            section2,
+            headerRow,
+            ...dataRows
+        ];
+
+        const ws1 = XLSX.utils.aoa_to_sheet(aoa);
+
+        // Set column widths
+        ws1['!cols'] = [
+            {wch: 8}, {wch: 12}, {wch: 20}, {wch: 12}, {wch: 10},
+            {wch: 12}, {wch: 12}, {wch: 45}, {wch: 8}, {wch: 8}, {wch: 8}, {wch: 8}, {wch: 12}
+        ];
+
+        // Merge cells
+        ws1['!merges'] = [
+            {s:{r:0,c:0}, e:{r:0,c:12}},   // Title row
+            {s:{r:1,c:0}, e:{r:1,c:12}},   // 客户信息
+            {s:{r:2,c:0}, e:{r:2,c:12}},   // 客户姓名
+            {s:{r:3,c:0}, e:{r:3,c:3}},    // 客户单位
+            {s:{r:3,c:4}, e:{r:3,c:5}},    // 课题组
+            {s:{r:4,c:0}, e:{r:4,c:3}},    // 客户电话
+            {s:{r:4,c:4}, e:{r:4,c:5}},    // Email
+            {s:{r:5,c:0}, e:{r:5,c:3}},    // 发票抬头
+            {s:{r:5,c:4}, e:{r:5,c:5}},    // 税号
+            {s:{r:6,c:0}, e:{r:6,c:12}},   // 送货地址
+            {s:{r:7,c:1}, e:{r:7,c:3}},    // 日期值
+            {s:{r:7,c:4}, e:{r:7,c:5}},    // 订购邮箱
+            {s:{r:7,c:6}, e:{r:7,c:12}},   // 邮箱值
+            {s:{r:8,c:0}, e:{r:8,c:3}},    // 备注
+            {s:{r:8,c:4}, e:{r:8,c:5}},    // 客服电话
+            {s:{r:8,c:6}, e:{r:8,c:12}},   // 电话值
+            {s:{r:11,c:0}, e:{r:11,c:12}}, // 订单信息
+            {s:{r:12,c:4}, e:{r:12,c:5}},  // 纯度 header merge
+            {s:{r:12,c:7}, e:{r:12,c:12}}, // 其他修饰 merge
+        ];
+
+        // Set styles (basic - SheetJS community has limited style support)
+        // Title
+        if (ws1['A1']) { ws1['A1'].s = { font: {bold:true, sz:22} }; }
+
+        XLSX.utils.book_append_sheet(wb, ws1, '多肽合成订购单');
+
+        // --- Sheet2: Project Summary ---
+        const summaryAoa = [
+            ['项目编号', projNo],
+            ['编制日期', projDate],
+            ['客户姓名', info.name || '未提供'],
+            ['联系电话', info.phone || '未提供'],
+            ['客户邮箱', info.email || '未提供'],
+            [''],
+            ['AI方案摘要'],
+            [currentPlanText.substring(0, 3000)]
+        ];
+        const ws2 = XLSX.utils.aoa_to_sheet(summaryAoa);
+        ws2['!cols'] = [{wch: 14}, {wch: 80}];
+        XLSX.utils.book_append_sheet(wb, ws2, '项目摘要');
+
+        const timestamp = new Date().toISOString().slice(0, 10).replace(/-/g, '');
+        const filename = `吉娃娃生物_多肽订购单_${timestamp}.xlsx`;
+        XLSX.writeFile(wb, filename);
+    }
+
+    // Parse peptide details from AI plan text
+    function parsePeptidesFromPlan(text) {
+        const peptides = [];
+        // Try to extract sequence patterns (single letter codes, 2+ chars)
+        const seqPattern = /([ACDEFGHIKLMNPQRSTVWY]{3,})/gi;
+        const seqMatches = text.match(seqPattern) || [];
+
+        // Extract purity
+        const purityMatch = text.match(/(\d+)%\s*纯度|纯度[>≥]?\s*(\d+)/);
+        const purity = purityMatch ? (purityMatch[1] || purityMatch[2]) + '%' : '95%';
+
+        // Extract amount
+        const amountMatch = text.match(/(\d+)\s*(mg|g)/i);
+        const amount = amountMatch ? amountMatch[1] + amountMatch[2] : '5mg';
+
+        if (seqMatches.length > 0) {
+            peptides.push({
+                sequence: seqMatches[0],
+                length: seqMatches[0].length,
+                amount: amount,
+                purity: purity,
+                nMod: '',
+                cMod: '',
+                otherMod: '',
+                price: ''
+            });
+        } else {
+            // Default empty row for manual fill
+            peptides.push({
+                sequence: '',
+                length: '',
+                amount: '',
+                purity: '',
+                nMod: '',
+                cMod: '',
+                otherMod: '',
+                price: ''
+            });
+        }
+
+        return peptides;
     }
 
     function downloadPlan() {
@@ -712,6 +864,10 @@ ${desc}
 
         if (aiDownloadBtn) {
             aiDownloadBtn.addEventListener('click', downloadPlan);
+        }
+
+        if (aiExcelBtn) {
+            aiExcelBtn.addEventListener('click', downloadExcel);
         }
 
         if (aiRetryBtn) {
