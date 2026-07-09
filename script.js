@@ -251,6 +251,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function $(id) { return document.getElementById(id); }
 
     const aiPlanBtn = $('aiPlanBtn');
+    const heroAiPlanBtn = $('heroAiPlanBtn');
     const aiModalOverlay = $('aiModalOverlay');
     const aiModalClose = $('aiModalClose');
     const aiGenerateBtn = $('aiGenerateBtn');
@@ -839,6 +840,14 @@ ${desc}
             });
         } else {
             console.error('aiPlanBtn not found');
+        }
+
+        if (heroAiPlanBtn) {
+            heroAiPlanBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                openModal();
+            });
         }
 
         if (aiModalClose) {

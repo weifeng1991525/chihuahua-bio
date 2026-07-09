@@ -479,6 +479,34 @@ img {
     transform: translateX(4px);
 }
 
+.hero-btns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.hero-btn-ai {
+    background: linear-gradient(135deg, #7C3AED, #0891B2);
+    box-shadow: 0 4px 16px rgba(124,58,237,0.3);
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.hero-btn-ai:hover {
+    box-shadow: 0 8px 24px rgba(124,58,237,0.4);
+}
+
+.hero-btn-ai svg {
+    order: -1;
+    transition: transform var(--transition);
+}
+
+.hero-btn-ai:hover svg {
+    transform: rotate(15deg);
+}
+
 .hero-equipment {
     display: flex;
     gap: 16px;
