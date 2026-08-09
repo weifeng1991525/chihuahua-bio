@@ -280,9 +280,9 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentProjectNo = '';
     let currentProjectDate = '';
 
-    // AGENS API Configuration
-    const AGENS_API_URL = 'https://apihub.agnes-ai.com/v1/chat/completions';
-    const AGENS_API_KEY = 'sk-wvjRUdJZUq37FzP1lZMLKgrL3tqtuaP7xqeNaEbc1pYjIonG';
+    // GLM API Configuration (智谱AI)
+    const GLM_API_URL = 'https://open.bigmodel.cn/api/paas/v4/chat/completions';
+    const GLM_API_KEY = '7fa348ac8dc5491cbe5fc2c8b619444c.4BatruSBYE7fOoXV';
 
     // Web3Forms Configuration
     const WEB3FORMS_ACCESS_KEY = '5716acf4-7422-4d78-942d-4eeb57ccf12d';
@@ -461,14 +461,14 @@ ${desc}
     }
 
     async function callAgensAPI(prompt) {
-        const response = await fetch(AGENS_API_URL, {
+        const response = await fetch(GLM_API_URL, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${AGENS_API_KEY}`
+                'Authorization': `Bearer ${GLM_API_KEY}`
             },
             body: JSON.stringify({
-                model: 'agnes-2.0-flash',
+                model: 'GLM-4.7-Flash',
                 messages: [
                     { role: 'system', content: KB_CONTEXT },
                     { role: 'user', content: prompt }
