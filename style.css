@@ -3248,3 +3248,340 @@ img {
         width: 8px;
     }
 }
+
+/* ============================================
+   现货目录 (Stock Catalog) — 在线浏览 + 下载
+   ============================================ */
+.stock-catalog {
+    margin-top: 56px;
+    padding-top: 40px;
+    border-top: 1px solid var(--border);
+    animation: fadeUp .6s ease both;
+}
+.sc-catalog-head {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 36px;
+}
+.sc-catalog-title h3 {
+    font-size: 24px;
+    color: var(--dark);
+    margin-bottom: 10px;
+}
+.sc-catalog-title p {
+    color: var(--text-light);
+    font-size: 15px;
+    max-width: 720px;
+    line-height: 1.8;
+}
+.sc-downloads {
+    flex-shrink: 0;
+}
+.sc-download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 22px;
+    border-radius: var(--radius-md);
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: #fff;
+    font-weight: 600;
+    font-size: 15px;
+    box-shadow: 0 6px 18px rgba(0,201,167,.3);
+    transition: transform var(--transition), box-shadow var(--transition);
+}
+.sc-download-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 26px rgba(0,201,167,.42);
+}
+.sc-block {
+    margin-bottom: 40px;
+}
+.sc-block-head {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 18px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+    flex-wrap: wrap;
+}
+.sc-block-head .sc-block-num {
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--primary);
+    letter-spacing: 1px;
+}
+.sc-block-head h4 {
+    font-size: 18px;
+    color: var(--dark);
+}
+.sc-block-head em {
+    font-style: normal;
+    color: var(--text-lighter);
+    font-size: 13px;
+    margin-left: auto;
+}
+/* toolbar */
+.sc-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 18px;
+}
+.sc-cats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+.sc-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 14px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: #fff;
+    color: var(--text);
+    font-size: 13px;
+    cursor: pointer;
+    transition: all var(--transition);
+    font-family: inherit;
+}
+.sc-chip:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+.sc-chip.active {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    border-color: transparent;
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(0,201,167,.25);
+}
+.sc-cat-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+}
+.sc-search {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+.sc-input {
+    width: 260px;
+    max-width: 100%;
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-family: inherit;
+    font-size: 14px;
+    color: var(--text);
+    background: #fff;
+    transition: border-color var(--transition), box-shadow var(--transition);
+}
+.sc-input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(0,201,167,.15);
+}
+.sc-clear {
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: #fff;
+    color: var(--text-light);
+    font-size: 13px;
+    cursor: pointer;
+    transition: all var(--transition);
+    font-family: inherit;
+}
+.sc-clear:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+}
+/* price table */
+.sc-table-wrap {
+    overflow-x: auto;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    background: #fff;
+    box-shadow: var(--shadow-sm);
+}
+.sc-table {
+    width: 100%;
+    min-width: 720px;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+.sc-table thead th {
+    background: var(--bg-section);
+    color: var(--dark);
+    font-weight: 600;
+    padding: 12px 14px;
+    text-align: left;
+    border-bottom: 2px solid var(--border);
+    white-space: nowrap;
+}
+.sc-table tbody td {
+    padding: 11px 14px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+    vertical-align: middle;
+}
+.sc-table tbody tr:last-child td {
+    border-bottom: none;
+}
+.sc-table tbody tr:hover {
+    background: var(--bg-light);
+}
+.sc-badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 999px;
+    color: #fff;
+    font-size: 12px;
+    white-space: nowrap;
+}
+.sc-name {
+    min-width: 180px;
+}
+.sc-code .code-style {
+    color: var(--secondary-dark);
+    font-weight: 600;
+}
+.sc-pack {
+    color: var(--text-light);
+    white-space: nowrap;
+}
+.sc-price {
+    font-weight: 700;
+    color: var(--primary-dark);
+    white-space: nowrap;
+}
+.sc-empty {
+    text-align: center;
+    padding: 28px;
+    color: var(--text-lighter);
+}
+.sc-pagination {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 14px;
+}
+.sc-count {
+    font-size: 13px;
+    color: var(--text-light);
+}
+.sc-pages {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+.sc-page {
+    min-width: 34px;
+    height: 34px;
+    padding: 0 8px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: #fff;
+    color: var(--text);
+    font-size: 13px;
+    cursor: pointer;
+    transition: all var(--transition);
+    font-family: inherit;
+}
+.sc-page:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+.sc-page.active {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    border-color: transparent;
+    color: #fff;
+}
+/* function catalog */
+.sc-func-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.sc-func-cat {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+}
+.sc-func-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 18px;
+    background: var(--bg-section);
+    border-bottom: 1px solid var(--border);
+}
+.sc-func-n {
+    font-size: 13px;
+    color: var(--text-lighter);
+}
+.sc-func-item {
+    padding: 16px 18px;
+    border-bottom: 1px solid var(--border);
+}
+.sc-func-item:last-child {
+    border-bottom: none;
+}
+.sc-func-title {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 8px;
+}
+.sc-func-code {
+    font-weight: 700;
+    color: var(--secondary-dark);
+    font-size: 14px;
+}
+.sc-func-name {
+    font-weight: 600;
+    color: var(--dark);
+    font-size: 15px;
+}
+.sc-func-desc {
+    color: var(--text);
+    font-size: 14px;
+    line-height: 1.8;
+    margin-bottom: 6px;
+}
+.sc-func-app {
+    color: var(--text-light);
+    font-size: 13px;
+    line-height: 1.7;
+}
+.sc-func-app strong {
+    color: var(--secondary);
+}
+@media (max-width: 768px) {
+    .sc-input {
+        width: 100%;
+    }
+    .sc-search, .sc-toolbar {
+        width: 100%;
+    }
+    .sc-block-head em {
+        margin-left: 0;
+        width: 100%;
+    }
+}

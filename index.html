@@ -631,6 +631,34 @@
                 </div>
                 <p class="stock-note">* 以上仅为部分示例，更多现货产品请致电 13317714667 或发送邮件至 genewawa@foxmail.com 咨询。</p>
             </div>
+
+            <!-- 完整现货目录：在线浏览 + Excel 下载 -->
+            <div class="stock-catalog">
+                <div class="sc-catalog-head">
+                    <div class="sc-catalog-title">
+                        <h3>完整现货目录</h3>
+                        <p>吉娃娃生物现货产品分类齐全，涵盖多肽激素、活性多肽、多肽底物、竞争性多肽四大类。您可在线检索、按类别筛选，或下载 Excel 完整目录（含功能说明与报价表）离线查阅。</p>
+                    </div>
+                    <div class="sc-downloads">
+                        <a class="sc-download-btn" href="吉娃娃生物现货目录及功能说明.xlsx" download>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg>
+                            <span>下载完整现货目录(.xlsx)</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 功能目录（产品说明） -->
+                <div class="sc-block">
+                    <div class="sc-block-head"><span class="sc-block-num">01</span><h4>现货产品功能目录</h4><em>产品概述与应用方向</em></div>
+                    <div id="stockFuncRoot"></div>
+                </div>
+
+                <!-- 价格目录（在线报价） -->
+                <div class="sc-block">
+                    <div class="sc-block-head"><span class="sc-block-num">02</span><h4>现货产品价格目录</h4><em>按类别检索 · 实时报价（元）</em></div>
+                    <div id="stockPriceRoot"></div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -1493,6 +1521,7 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg>
     </button>
 
+    <script src="stock-data.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
